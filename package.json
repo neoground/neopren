@@ -1,0 +1,23 @@
+{
+  "name": "neopren",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Neoground GmbH",
+  "license": "MPL-2.0",
+  "scripts": {
+    "build:css": "node-sass --include-path scss scss/style.scss dist/style.css",
+    "build:mincss": "postcss dist/style.css --use autoprefixer cssnano -b 'last 2 versions' --no-map -o dist/style.min.css"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "autoprefixer": "^10.4.17",
+    "bootstrap": "^5.3.2",
+    "cssnano": "^6.0.3",
+    "dayjs": "^1.11.10",
+    "htm": "^3.1.1",
+    "node-sass": "^9.0.0",
+    "postcss": "^8.4.33",
+    "postcss-cli": "^11.0.0",
+    "preact": "^10.19.3"
+  }
+}
