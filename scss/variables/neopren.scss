@@ -1,0 +1,48 @@
+// +-------------------------------------------------------------------------+
+// |    variables/neopren.scss                          Neopren variables    |
+// +-------------------------------------------------------------------------+
+
+// Widths and Heights
+// ---------------------------------------------------------------------------
+
+$sidebar-width: 15rem;
+$toolbar-height: 4rem;
+$header-height: 12rem;
+$content-nav-width: 300px;
+
+// Small version (e.g. for downrich menus)
+$content-nav-sm-width: 220px;
+
+// Transitions
+// ---------------------------------------------------------------------------
+
+$sidebar-transition-time: 1s;
+$dark-media-viewer-transition-time: .2s;
+
+// Fonts
+// ---------------------------------------------------------------------------
+
+$font-family-serif: "Iowan Old Style", "Apple Garamond", "Baskerville", "Droid Serif", "Source Serif Pro", "Times New Roman", "Times", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+// Theme
+// ---------------------------------------------------------------------------
+
+$primary: $m-indigo-600;
+$secondary: $m-amber-600;
+$info: $m-cyan-600;
+$success: $m-green-600;
+$warning: $m-yellow-600;
+$danger: $m-red-600;
+$dark: $m-grey-900;
+$light: $m-grey-100;
+
+$component-active-color: $dark;
+$nav-pills-link-active-color: $white;
+$pagination-bg: $white;
+$list-group-bg: $white;
+
+$body_bg: $m-grey-50;
+
+$toolbar-bg: $m-indigo-800;
+$sidebar-bg: $m-indigo-900;
+$text-muted-color: $m-grey-800;
