@@ -1,0 +1,39 @@
+// +-------------------------------------------------------------------------+
+// |    buttons.scss                     Buttons and icons related styles    |
+// +-------------------------------------------------------------------------+
+
+// btn-primary should have a light text color
+// by default it's black which isn't looking
+// that great...
+.btn-primary {
+    color: rgba(255, 255, 255, 0.9);
+
+    &:hover {
+        color: rgba(255, 255, 255, 0.75);
+    }
+}
+
+// Button with icon
+// ---------------------------------------------------------------------------
+.btn-icon {
+    display: flex !important;
+    align-items: center !important;
+
+    .material-symbols-outlined, .material-symbols-sharp {
+        font-size: 1.75rem;
+        line-height: 1;
+        margin-right: .25rem;
+    }
+}
+
+// Material icons
+// ---------------------------------------------------------------------------
+.mi-icon {
+    line-height: 1;
+    font-size: 1.25rem !important;
+}
+
+.mi-btn .material-symbols-outlined, .mi-btn .material-symbols-sharp {
+    line-height: 1.5;
+    font-size: 1.25rem;
+}
