@@ -1,0 +1,19 @@
+// +-------------------------------------------------------------------------+
+// |    fonts.scss                               Custom font declarations    |
+// +-------------------------------------------------------------------------+
+
+// Material Symbols
+// ---------------------------------------------------------------------------
+$material-symbols-font-path: '../node_modules/material-symbols/';
+
+@import "../../node_modules/material-symbols/outlined.scss";
+// @import "../../node_modules/material-symbols/rounded.scss";
+// @import "../../node_modules/material-symbols/sharp.scss";
+
+.material-symbols-filled {
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
