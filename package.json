@@ -15,6 +15,8 @@
     "cssnano": "^6.0.3",
     "dayjs": "^1.11.10",
     "htm": "^3.1.1",
+    "marked": "^8.0.0",
+    "material-symbols": "^0.15.0",
     "node-sass": "^9.0.0",
     "postcss": "^8.4.33",
     "postcss-cli": "^11.0.0",
