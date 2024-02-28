@@ -41,8 +41,8 @@ export default class Form {
     static Select = (props, state, context) => {
         let params = this.getParams(props.params)
         return html`
-            <select name=${props.name} id=${"input-" + props.name} value=${props.value} 
-                    onInput=${props.change} 
+            <select name=${props.name} id=${"input-" + props.name} value=${props.value}
+                    onInput=${props.change}
                     class=${props.size == 'lg' ? 'form-control form-control-lg' : 'form-control'} ...${params}>
                 ${Object.entries(props.options).map(([k, v]) => html`
                     <option value=${k}>${v}</option>
@@ -80,8 +80,11 @@ export default class Form {
 
     static getParams = (input) => {
         let params = {}
-        if(input) {
+        if(typeof input == 'string') {
             params = JSON.parse(input)
+        }
+        if(typeof input == 'object') {
+            params = input
         }
         return params
     }
