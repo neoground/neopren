@@ -1,0 +1,15 @@
+// +-------------------------------------------------------------------------+
+// |    forms.scss                                 Forms, inputs and more    |
+// +-------------------------------------------------------------------------+
+
+select.form-control {
+    appearance: menulist-button;
+}
+
+.form-control {
+    background-color: lighten($m-blue-grey-50, 3);
+
+    &:focus, &:active {
+        background-color: $white !important;
+    }
+}
