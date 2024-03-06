@@ -1,0 +1,118 @@
+// +-------------------------------------------------------------------------+
+// |    header.scss          Header / Footer stylings + toolbar + top nav    |
+// +-------------------------------------------------------------------------+
+
+// Top / Bottom toolbar
+// ---------------------------------------------------------------------------
+
+header.toolbar, footer.toolbar {
+    flex: 1;
+    height: $toolbar-height;
+
+    background: $toolbar-bg;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    z-index: 50;
+
+    ul.nav {
+        flex-wrap: nowrap;
+        justify-content: inherit;
+    }
+
+    .nav-link {
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    ul.nav, li {
+        height: 100%;
+    }
+
+    li.active {
+        background: $primary;
+        border-radius: $border-radius;
+    }
+
+    // Animation for sidebar hide / show
+    transition: margin-left $sidebar-transition-time ease-in-out;
+}
+
+// Header dropdowns
+header.toolbar {
+    .dropdown-menu {
+        position: fixed !important;
+        height: auto !important;
+        inset: auto !important;
+        transform: none !important;
+    }
+}
+
+// Footer pagination
+footer.toolbar {
+    ul.pagination {
+        margin: 0;
+    }
+
+    .dropdown-menu {
+        inset: auto auto 3rem 0 !important;
+        transform: none !important;
+    }
+
+    // No dropdown toggle indicator
+    .dropdown-toggle::after {
+        display: none !important;
+    }
+
+    .container {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $white;
+    }
+}
+
+.content-toolbar {
+    ul.nav {
+        flex-wrap: nowrap;
+        justify-content: inherit;
+    }
+
+    .nav-link {
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .nav-link.active {
+        color: $white !important;
+    }
+}
+
+.toolbar-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+
+    // Horizontally scrollable on small devices
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+// Page header section (with heading + fancy bg)
+// ---------------------------------------------------------------------------
+
+.page-header {
+    width: 100%;
+    height: $header-height;
+    padding-top: 8rem;
+    margin-bottom: 2rem;
+
+    color: $white;
+
+    h1 {
+        text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+}
