@@ -1,0 +1,63 @@
+// +-------------------------------------------------------------------------+
+// |    helpers.scss                          Small helpers and utilities    |
+// +-------------------------------------------------------------------------+
+
+// No arrow indicator for dropdown
+.no-indicator {
+    &::after {
+        display: none;
+    }
+}
+
+.clickable {
+    cursor: pointer !important;
+}
+
+.text-monospace {
+    font-family: $font-family-monospace !important;
+}
+
+.text-serif {
+    font-family: $font-family-serif !important;
+    font-variant-ligatures: common-ligatures !important;
+}
+
+.align-items-normal {
+    align-items: normal !important;
+}
+
+// Display flags a bit larger
+.flag {
+    font-size: 1.4rem;
+}
+
+// Icons are often needed at 1rem
+.icon-1x {
+    font-size: 1rem !important;
+}
+.icon-1-25x {
+    font-size: 1.25rem !important;
+}
+.icon-1-5x {
+    font-size: 1.5rem !important;
+}
+
+// Remove focus styles (unneeded border around active element)
+:focus-visible {
+    outline: 0;
+    box-shadow: none;
+}
+
+// Remove arrows from number input
+
+// Chrome, Safari, Edge, Opera
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+// Firefox
+.no-arrows {
+    -moz-appearance: textfield;
+}
