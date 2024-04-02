@@ -1,0 +1,284 @@
+// +-------------------------------------------------------------------------+
+// |    aside.scss                                  Neopren sidebar style    |
+// +-------------------------------------------------------------------------+
+
+.sidebar {
+    overflow-y: auto;
+    width: $sidebar-width;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    padding: 0 1rem .2rem 1rem;
+    color: $white;
+
+    z-index: 100;
+    transition: all $sidebar-transition-time ease-in-out;
+
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+    background-color: rgba($sidebar-bg,.9);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    &.hidden {
+        transform: translate(-$sidebar-width, 0);
+    }
+
+    .logo-area {
+        height: $toolbar-height;
+        min-height: $toolbar-height;
+        border-bottom: 1px solid $m-grey-400;
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        a {
+            color: $white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .current-times {
+        font-family: $font-family-monospace;
+        text-align: center;
+
+        .material-symbols-outlined {
+            font-size: 1rem;
+            line-height: 1rem;
+        }
+    }
+    .times-nav {
+        flex-wrap: nowrap !important;
+
+        .nav-link {
+            color: $m-grey-400 !important;
+
+            &.active {
+                color: $white !important;
+                border-bottom: 1px solid $m-grey-400;
+            }
+        }
+    }
+    .times-section {
+        border-bottom: 1px solid $m-grey-400;
+        padding-top: .25rem;
+        padding-bottom: .5rem;
+        margin-bottom: .5rem;
+        font-size: .9rem;
+
+        .calendar-month .row {
+            --bs-gutter-x: 0rem;
+        }
+
+        .calendar-day.is-today .calendar-no {
+            border: none !important;
+            background: $m-amber-700;
+            padding: calc(var(--bs-gutter-x) * .5);
+        }
+
+        .calendar-day.is-holiday {
+            color: $m-red-400;
+        }
+
+        .calendar-heading {
+            color: $m-grey-400 !important;
+        }
+
+        .h4 {
+            font-size: 1.1rem !important;
+            color: $m-grey-400 !important;
+            font-weight: bold;
+        }
+    }
+
+    .mi-icon {
+        color: rgba(255, 255, 255, .75);
+    }
+
+    .nav-item {
+        margin-top: .25rem;
+        margin-bottom: .25rem;
+        border-radius: $border-radius;
+        color: rgba(255, 255, 255, .9);
+        transition: all .2s linear;
+        width: 100%;
+
+        .ext-btn {
+            visibility: hidden;
+            opacity: 0;
+            transition: all .2s linear;
+            padding: 0;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, .25);
+            color: $white;
+
+            .ext-btn {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    .subheader {
+        margin-bottom: .25rem;
+        color: $m-grey-400;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        &:not(:first-child) {
+            margin-top: .75rem;
+        }
+    }
+
+    .weather-data {
+        font-size: .9rem;
+        font-family: $font-family-monospace;
+
+        .material-symbols-outlined, .material-symbols-sharp {
+            font-size: 1rem;
+            line-height: 1rem;
+            margin-right: .5rem;
+        }
+
+        .col-6 > span {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .notifications {
+        .material-symbols-outlined {
+            font-size: 1.5rem;
+        }
+
+        .counter-badge {
+            position: absolute;
+        }
+
+        .is-active {
+            border-bottom: 2px solid $primary;
+        }
+
+        .list-group-item {
+            background: rgba($m-blue-grey-800, 0.75);
+            color: $white;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: .5rem;
+            border-radius: $border-radius;
+            border: 1px solid $m-blue-grey-600;
+            padding: .75rem;
+
+            transition: all .2s ease-in-out;
+
+            .text-muted {
+                color: $m-blue-grey-300 !important;
+            }
+
+            .material-symbols-outlined, .material-symbols-sharp {
+                font-size: 1.3rem;
+                line-height: 1.5rem;
+                padding-right: .25rem;
+                color: rgba(200, 200, 200, .75);
+            }
+
+            &.is-new {
+                border-color: $primary;
+                background: rgba($primary, 0.5);
+
+                &:hover {
+                    background: rgba($primary, 0.75);
+                }
+
+                .text-muted, .material-symbols-sharp {
+                    color: $white !important;
+                }
+            }
+
+            p {
+                line-height: 1.25rem;
+                word-break: break-word;
+            }
+
+            &:hover {
+                background: rgba($m-blue-grey-600, 0.75);
+            }
+
+            .date {
+                font-size: .8rem;
+                line-height: .9rem;
+                text-align: end;
+                margin-left: auto;
+            }
+
+            h6 {
+                font-weight: 600;
+                word-wrap: break-word;
+            }
+        }
+    }
+
+    hr {
+        margin: .75rem 0;
+    }
+}
+
+.logo-icon {
+    width: 3rem;
+}
+
+// Responsiveness
+// ---------------------------------------------------------------------------
+
+// Margin for app and other stuff because of visible sidebar
+// If sidebar is hidden, no margin!
+.sidebar-is-visible {
+    header.toolbar, footer.toolbar {
+        margin-left: $sidebar-width;
+    }
+
+    .app-container {
+        margin-left: $sidebar-width;
+    }
+}
+
+// Hide sidebar on mobile by default
+@include media-breakpoint-down(lg) {
+    // Invert show / hide
+    .sidebar {
+        // Hide
+        &:not(.hidden) {
+            transform: translate(-$sidebar-width, 0);
+        }
+
+        // Show
+        &.hidden {
+            transform: translate(0, 0);
+        }
+    }
+
+    // Sidebar as overlay, so no margin in any case
+    .sidebar-is-visible, .sidebar-is-hidden {
+        header.toolbar, footer.toolbar {
+            margin-left: 0;
+        }
+
+        .app-container {
+            margin-left: 0;
+        }
+    }
+
+    .sidebar-is-hidden {
+        // Darken background because sidebar is an overlay
+        .dark-background {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
