@@ -1,0 +1,219 @@
+// +-------------------------------------------------------------------------+
+// |    layouts.scss               Different layouts and layout utilities    |
+// +-------------------------------------------------------------------------+
+
+// Base layout
+// ---------------------------------------------------------------------------
+
+// The main app wrapper (around everything)
+.app-wrapper {
+    display: flex;
+}
+
+// The container (main part of page, besides aside)
+.app-container {
+    flex: 1;
+    min-height: 100vh;
+
+    // Animation for sidebar hide / show
+    transition: margin-left $sidebar-transition-time ease-in-out;
+}
+
+// Overlays
+// ---------------------------------------------------------------------------
+
+// Dark background overlay
+.dark-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(64, 64, 64, 0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: all $sidebar-transition-time ease-in-out;
+    z-index: 99;
+
+    // Invisible by default
+    opacity: 0;
+    visibility: hidden;
+}
+
+// Same for modal backdrop
+.modal-backdrop {
+    background: rgba(64, 64, 64, .75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    &.show {
+        opacity: 1;
+    }
+}
+
+// Layout with content nav + remaining space for content
+// ---------------------------------------------------------------------------
+// Used by e.g. Downrich + Archive22
+
+.sidebar-is-hidden .content-section {
+    width: 100vw;
+}
+.sidebar-is-visible .content-section {
+    width: calc(100vw - #{$sidebar-width});
+}
+
+.content-section {
+    display: flex;
+
+    &.hidden-content-nav {
+        .content-container {
+            // TODO Not on nav overlay on mobile
+            margin-left: -$content-nav-width;
+        }
+    }
+
+    &.hidden-content-nav-small {
+        .content-container {
+            // TODO Not on nav overlay on mobile
+            margin-left: -$content-nav-sm-width;
+        }
+
+        #neopren-content-secnav {
+            margin-left: -$content-nav-sm-width;
+        }
+    }
+
+    &.hidden-content-nav-small:has(> #neopren-content-secnav) {
+        .content-container {
+            // TODO Not on nav overlay on mobile
+            margin-left: 0 !important;
+        }
+    }
+}
+
+.content-nav {
+    width: $content-nav-width;
+    min-width: $content-nav-width;
+    overflow-y: auto;
+    min-height: calc(100vh - #{$header-height});
+    max-height: calc(100vh - #{$header-height});
+    transition: transform $sidebar-transition-time ease-in-out;
+    background: var(--bs-body-bg);
+
+    &.hidden {
+        transform: translate(-$content-nav-sm-width, 0);
+    }
+
+    .subheader {
+        background: $secondary !important;
+        color: $white;
+    }
+}
+
+.content-nav-small {
+    width: $content-nav-sm-width;
+    min-width: $content-nav-sm-width;
+}
+
+@media screen and (max-width: 1400px) {
+    .content-nav {
+        width: calc(#{$content-nav-width} * 0.8);
+        min-width: calc(#{$content-nav-width} * 0.8);
+    }
+}
+
+.content-container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: stretch;
+    transition: all $sidebar-transition-time ease-in-out;
+
+    .row {
+        display: flex;
+        flex: 1;
+        margin: 1rem 0 1rem 0;
+        // Prevent overflow of too long content
+        width: 100%;
+    }
+
+    &.inline-scroll {
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        min-height: calc(100vh - #{$header-height});
+        max-height: calc(100vh - #{$header-height});
+    }
+}
+
+// List group is the nav
+.list-group {
+    .subheader {
+        display: flex;
+        align-items: center;
+    }
+
+    .material-symbols-outlined, .material-symbols-sharp {
+        font-size: 1.25rem;
+    }
+
+    .spacer {
+        height: .5rem;
+        pointer-events: none;
+    }
+
+    .hide-when-collapsed {
+        display: inline-block;
+    }
+    .show-when-collapsed {
+        display: none;
+    }
+
+    .list-group-item.collapsed {
+        .hide-when-collapsed {
+            display: none;
+        }
+        .show-when-collapsed {
+            display: inline-block;
+        }
+    }
+}
+
+// Smaller header on smaller devices
+@media screen and (max-width: 1200px) {
+    $header-height: 12rem;
+
+    .page-header {
+        height: $header-height;
+        padding-top: 6rem;
+    }
+
+    .content-container.inline-scroll {
+        min-height: calc(100vh - #{$header-height}) !important;
+        max-height: calc(100vh - #{$header-height}) !important;
+    }
+
+    .content-nav {
+        min-height: calc(100vh - #{$header-height}) !important;
+        max-height: calc(100vh - #{$header-height}) !important;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    $header-height: 10rem;
+
+    .page-header {
+        height: $header-height;
+        padding-top: 5rem;
+    }
+
+    .content-container.inline-scroll {
+        min-height: calc(100vh - #{$header-height}) !important;
+        max-height: calc(100vh - #{$header-height}) !important;
+    }
+
+    .content-nav {
+        min-height: calc(100vh - #{$header-height}) !important;
+        max-height: calc(100vh - #{$header-height}) !important;
+    }
+}
