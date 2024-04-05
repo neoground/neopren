@@ -1,0 +1,151 @@
+// +-------------------------------------------------------------------------+
+// |    _neo.scss            Neopren base style and bootstrap adjustments    |
+// +-------------------------------------------------------------------------+
+
+// Small, global elements and bootstrap component adjustments
+// ---------------------------------------------------------------------------
+
+// Dropdowns with icons
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .material-symbols-sharp, .material-symbols-outlined {
+        font-size: 1rem;
+        line-height: 1.25rem;
+    }
+}
+
+.table td {
+    padding: .5rem;
+}
+
+// Cards have a slightly contrast to the background. Also see dark mode.
+.card, .modal-content {
+    background: $m-blue-grey-50;
+}
+.card {
+    border: none;
+}
+
+.bg-translucent {
+    background: rgba($m-blue-grey-50, .8) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.popover {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+// Pagination
+ul.pagination {
+    font-size: 1.25rem;
+
+    .material-symbols-outlined, .material-symbols {
+        font-size: 1rem;
+    }
+}
+
+.progress {
+    background-color: $white;
+}
+
+// Toasts
+.toast {
+    bottom: 1rem;
+    right: 1rem;
+    position: fixed;
+    padding: 0;
+    margin: 2rem;
+
+    .material-symbols-outlined, .material-symbols {
+        font-size: 1.5rem !important;
+    }
+}
+
+// Translucent middle box for login / lockscreen etc.
+.middle-box {
+    display: flex;
+    background: rgba(32, 32, 32, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 2rem;
+    text-align: center;
+    flex-direction: column;
+    border-radius: .5rem;
+    color: rgba(255, 255, 255, .9);
+}
+
+.modal-content {
+    border-radius: $border-radius;
+}
+
+// Changelog: del, ins (rare tags)
+.changelog-table {
+    vertical-align: middle;
+    line-height: 2rem;
+
+    del {
+        background: rgba($m-red-400, .5);
+        padding: .2rem .4rem;
+        margin: 0 .25rem;
+    }
+
+    ins {
+        background: rgba($m-green-400, .5);
+        padding: .2rem .4rem;
+        margin: 0 .25rem;
+        text-decoration: none;
+    }
+
+    td:first-child {
+        font-weight: 600;
+    }
+}
+
+// Spinner animation
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+.spin {
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+// Default case on light mode (see dark mode for opposites)
+.show-on-darkmode {
+    display: none;
+}
+.show-on-lightmode {
+    display: flex;
+}
+
+// Bold heading directly on background (image)
+.bold-heading {
+    font-weight: 600;
+    text-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+}
+
+// Normally a modal should hide the scroll bar at all,
+// but content starts to jump on large parges then...
+// It still jumps with this fix, but only horizontally,
+// not scrolling up or down. So it's progress I guess...
+.modal-open {
+    padding-right: 0 !important;
+}
+
+// Color fixes for Bootstrap 5.3
+.text-muted {
+    color: $text-muted-color !important;
+}
