@@ -1,0 +1,91 @@
+// +-------------------------------------------------------------------------+
+// |    calendar.scss            Calendar / Equinox module related styles    |
+// +-------------------------------------------------------------------------+
+
+$cal-border-color: $m-grey-400;
+$cal-active-color: $m-red-600;
+$week-no-color: $m-grey-400;
+$inactive-color: $m-grey-400;
+
+.calendar-month {
+    text-align: center;
+
+    .calendar-day, .week-number {
+        border-bottom: 1px solid $cal-border-color;
+        border-right: 1px solid $cal-border-color;
+        padding: 0 !important;
+        position: relative;
+
+        .calendar-no {
+            padding: calc(var(--bs-gutter-x) * .5);
+        }
+
+        &.is-holiday {
+            color: $danger;
+        }
+
+        &.other-month {
+            color: $inactive-color;
+
+            &.is-holiday {
+                color: rgba($danger, .5);
+            }
+        }
+
+        &.is-hidden .calendar-no {
+            display: none !important;
+        }
+
+        &.is-today .calendar-no {
+            border: 8px solid $cal-active-color;
+            padding: calc(var(--bs-gutter-x) * .5 - 8px);
+        }
+    }
+
+    .week-number {
+        border-left: 1px solid $cal-border-color;
+        color: $week-no-color;
+    }
+
+    .row {
+        margin: 0 !important;
+    }
+
+    .calendar-heading {
+        .col {
+            font-weight: 500;
+            border-bottom: 1px solid $cal-border-color;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+        }
+    }
+}
+
+// Equinox JS component: DatePicker
+.datePickerDropdown {
+    font-size: .9rem;
+
+    .calendar-month .row {
+        --bs-gutter-x: .5rem;
+    }
+
+    .calendar-day.is-today .calendar-no {
+        border: none !important;
+        background: $m-amber-600;
+        color: $black;
+        padding: calc(var(--bs-gutter-x) * .5);
+    }
+
+    .calendar-day.is-holiday {
+        color: $m-red-400;
+    }
+
+    .calendar-heading {
+        color: $m-grey-400 !important;
+    }
+
+    .h4 {
+        font-size: 1.1rem !important;
+        font-weight: bold;
+    }
+}
