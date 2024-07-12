@@ -421,4 +421,17 @@ export default class Format {
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, replaceStr)
     }
 
+    /**
+     * Format bytes to B / KB / MB / GB / ...
+     *
+     * @return string
+     * @param bytes input bytes
+     * @param precision precision of return value
+     */
+    static Bytes = (bytes, precision = 0) => {
+        const size = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        const factor = Math.floor((bytes.toString().length - 1) / 3);
+        return `${(bytes / Math.pow(1024, factor)).toFixed(precision)} ${size[factor]}`;
+    }
+
 }
