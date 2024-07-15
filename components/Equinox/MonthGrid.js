@@ -27,6 +27,7 @@ const html = htm.bind(h)
  * - calWeekHeading: string which is displayed as heading of calendar week column (default: "#")
  * - headingFormat: string which contains the format of the heading to display (default: "dd", see dayjs formatting)
  * - events: array of events from API (sub-arrays by date)
+ * - days: optional array of events from API, content must be HTML
  * - showEvents: bool, show events in month grid? Default: false
  * - today: optional dayjs date instance of date which should be highlighted as today
  */
@@ -83,6 +84,8 @@ export default class MonthGrid extends Component {
                     }
                 })
 
+                let content = props.days?.[day.format('YYYY-MM-DD')] || false
+
                 let today = this.props.today
                 if(today && day.isSame(today, 'day')) {
                     classes += ' is-today'
@@ -107,6 +110,8 @@ export default class MonthGrid extends Component {
                                 `)}
                             </div>
                         `}
+
+                        ${content && html`<div class="calendar-content">${content}</div>`}
                         
                         ${this.props.onDayClick && html`
                             <a href="#" class="stretched-link" onClick=${ev => { ev.preventDefault(); this.props.onDayClick(day) }}></a>

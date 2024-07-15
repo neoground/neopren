@@ -16,6 +16,9 @@ $inactive-color: $m-grey-400;
         padding: 0 !important;
         position: relative;
 
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         .calendar-no {
             padding: calc(var(--bs-gutter-x) * .5);
         }
@@ -49,6 +52,8 @@ $inactive-color: $m-grey-400;
 
     .row {
         margin: 0 !important;
+        display: flex;
+        flex-wrap: nowrap;
     }
 
     .calendar-heading {
@@ -58,6 +63,10 @@ $inactive-color: $m-grey-400;
             padding-top: .5rem;
             padding-bottom: .5rem;
         }
+    }
+
+    .calendar-content {
+        text-align: left;
     }
 }
 
