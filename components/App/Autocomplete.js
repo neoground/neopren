@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {Component, h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 import Api from "./Api.js"
 
@@ -39,7 +39,7 @@ export default class Autocomplete extends Component {
     }
 
     onInput = ev => {
-        if(this.props.onCustomInput) {
+        if (this.props.onCustomInput) {
             this.props.onCustomInput(ev.target.value)
         }
 
@@ -49,7 +49,7 @@ export default class Autocomplete extends Component {
     }
 
     getValue = () => {
-        if(this.props.value || this.props.value == '') {
+        if (this.props.value || this.props.value == '') {
             return this.props.value
         }
 
@@ -58,14 +58,14 @@ export default class Autocomplete extends Component {
 
     filterEntries = () => {
         let amount = this.props.amount
-        if(!amount) {
+        if (!amount) {
             amount = 10
         }
 
-        if(this.props.entries) {
+        if (this.props.entries) {
             let entries_filtered = []
 
-            if(this.props.allowCustom) {
+            if (this.props.allowCustom) {
                 entries_filtered.push({
                     key: this.getValue(),
                     value: this.getValue(),
@@ -73,11 +73,11 @@ export default class Autocomplete extends Component {
             }
 
             for (const [key, value] of Object.entries(this.props.entries)) {
-                if(value.value.toLowerCase().includes(this.getValue().toLowerCase())) {
+                if (value.value.toLowerCase().includes(this.getValue().toLowerCase())) {
                     entries_filtered.push(value)
                 }
 
-                if(entries_filtered.length >= amount) {
+                if (entries_filtered.length >= amount) {
                     break
                 }
             }
@@ -86,13 +86,13 @@ export default class Autocomplete extends Component {
                 ...this.state,
                 entries_filtered: entries_filtered
             })
-        } else if(this.props.entriesApi) {
+        } else if (this.props.entriesApi) {
             // Fetch filtered entries from API
             Api.get(this.props.entriesApi + "?q=" + this.getValue() + "&amount=" + amount)
                 .then(data => {
                     let entries = data.entries
 
-                    if(this.props.allowCustom) {
+                    if (this.props.allowCustom) {
                         entries = [
                             {
                                 key: this.getValue(),
@@ -112,12 +112,12 @@ export default class Autocomplete extends Component {
     }
 
     showDropdown = () => {
-        if(this.state.entries_filtered.length > 0) {
+        if (this.state.entries_filtered.length > 0) {
             let dropdownEl = document.getElementById('autocomplete-dropdown-' + this.props.name)
             let dropdown = bootstrap.Dropdown.getOrCreateInstance(dropdownEl, {
                 autoClose: 'inside'
             })
-            if(dropdown) {
+            if (dropdown) {
                 dropdown.show()
             }
         }
@@ -126,15 +126,15 @@ export default class Autocomplete extends Component {
     onSelect = (ev) => {
         ev.preventDefault()
         let key = ev.currentTarget.dataset.key
-        if(key) {
+        if (key) {
             for (const [intkey, el] of Object.entries(this.state.entries_filtered)) {
-                if(el && el.key && el.key == key) {
+                if (el && el.key && el.key == key) {
                     // Found it!
                     this.props.onSelect(el.value)
 
                     // Update entered term if implemented
                     let q = this.getValue()
-                    if(this.props.updateInputValue) {
+                    if (this.props.updateInputValue) {
                         q = this.props.updateInputValue(el.value)
                     }
 
@@ -151,7 +151,7 @@ export default class Autocomplete extends Component {
 
     render(props, state, context) {
         let params = {}
-        if(props.params) {
+        if (props.params) {
             params = props.params
         }
 
@@ -159,20 +159,23 @@ export default class Autocomplete extends Component {
 
         return html`
             <div class="d-flex dropdown">
-                <button type="button" class="dropdown-toggle position-absolute invisible h-100" style="z-index: 40" data-bs-toggle="dropdown" id=${"autocomplete-dropdown-" + this.props.name}></button>
-                <input type="text" class="form-control dropdown-toggle" 
-                       style="z-index: 50" id=${"autocomplete-" + this.props.name} name=${this.props.name} value=${value} 
-                       onInput=${this.onInput} onFocus=${this.showDropdown} ...${params} />
+                <button type="button" class="dropdown-toggle position-absolute invisible h-100" style="z-index: 40"
+                        data-bs-toggle="dropdown" id=${"autocomplete-dropdown-" + this.props.name}></button>
+                <input type="text" class="form-control dropdown-toggle"
+                       style="z-index: 50" id=${"autocomplete-" + this.props.name} name=${this.props.name}
+                       value=${value}
+                       onInput=${this.onInput} onFocus=${this.showDropdown} ...${params}/>
                 <ul class=${this.state.entries_filtered.length < 1 ? 'dropdown-menu invisible' : 'dropdown-menu'}
                     style="max-height: 40vh; overflow-y: auto;">
                     ${state.entries_filtered && state.entries_filtered.length > 0
                     && Object.entries(state.entries_filtered).map(([k, el]) => html`
-                    <li>
-                        <button class=${el.key == this.state.selected ? "dropdown-item d-block active" : "dropdown-item d-block"} type="button" data-key=${el.key} onClick=${this.onSelect}>
-                            <${props.renderEntry} el=${el.value} />
-                        </button>
-                    </li>
-                `)}
+                        <li>
+                            <button class=${el.key == this.state.selected ? "dropdown-item d-block active" : "dropdown-item d-block"}
+                                    type="button" data-key=${el.key} onClick=${this.onSelect}>
+                                <${props.renderEntry} el=${el.value}/>
+                            </button>
+                        </li>
+                    `)}
                 </ul>
             </div>
         `

@@ -35,37 +35,37 @@ export default class Toolbar extends Component {
             // Got sub menu
 
             // Active?
-            let is_active = props.el.sub.filter(function(obj) {
+            let is_active = props.el.sub.filter(function (obj) {
                 return obj.active === window.toolbar_active
             })
-            if(is_active.length > 0) {
+            if (is_active.length > 0) {
                 classname += ' active'
             }
 
             return html`
-            <li class=${classname + " dropdown"}>
-                <a href="#" class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown">
-                    <span class="material-symbols-sharp mi-icon mx-auto d-block">${props.el.icon}</span>
-                    ${props.el.name}
-                </a>
-                <ul class="dropdown-menu">
-                    ${props.el.sub.map(subel => html`
-                        <li>
-                            <a href=${window.neopren.baseUrl + subel.url}
-                               class=${(window.toolbar_active && window.toolbar_active === subel.active) ? 'dropdown-item active' : 'dropdown-item'}>
-                                <span class="material-symbols-sharp mi-icon me-2">${subel.icon}</span>
-                                ${subel.name}
-                            </a>
-                        </li>
-                    `)}
-                </ul>
-            </li>
-        `
+                <li class=${classname + " dropdown"}>
+                    <a href="#" class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown">
+                        <span class="material-symbols-sharp mi-icon mx-auto d-block">${props.el.icon}</span>
+                        ${props.el.name}
+                    </a>
+                    <ul class="dropdown-menu">
+                        ${props.el.sub.map(subel => html`
+                            <li>
+                                <a href=${window.neopren.baseUrl + subel.url}
+                                   class=${(window.toolbar_active && window.toolbar_active === subel.active) ? 'dropdown-item active' : 'dropdown-item'}>
+                                    <span class="material-symbols-sharp mi-icon me-2">${subel.icon}</span>
+                                    ${subel.name}
+                                </a>
+                            </li>
+                        `)}
+                    </ul>
+                </li>
+            `
         }
 
         let url = window.neopren.baseUrl + props.el.url
         let target = '_self'
-        if(props.el.type && props.el.type == 'external') {
+        if (props.el.type && props.el.type == 'external') {
             url = props.el.url
             target = '_blank'
         }

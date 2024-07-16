@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {Component, h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 import '../../node_modules/dayjs/dayjs.min.js'
 import Calendar3M from "../Equinox/Calendar3M.js"
@@ -70,14 +70,14 @@ export default class AsideClock extends Component {
         let utc_date = dayjs().add(offset, 'minute')
 
         let timezone = 'CET'
-        if(offset < -60) {
+        if (offset < -60) {
             // -120 -> CEST
             timezone = 'CEST'
         }
 
         let world = this.state.world
         // Update world time each minute (or if forced)
-        if(date.second() === 0 || full_reload) {
+        if (date.second() === 0 || full_reload) {
             const options = {
                 dateStyle: 'medium',
                 timeStyle: 'short',
@@ -87,7 +87,7 @@ export default class AsideClock extends Component {
             for (const key in world) {
                 if (world.hasOwnProperty(key)) {
                     const timezone = world[key].timezone;
-                    const dateTimeFormat = new Intl.DateTimeFormat('de-DE', { ...options, timeZone: timezone });
+                    const dateTimeFormat = new Intl.DateTimeFormat('de-DE', {...options, timeZone: timezone});
                     const now = new Date();
                     const [date, time] = dateTimeFormat.format(now).split(', ');
                     world[key].date = date;
@@ -110,12 +110,15 @@ export default class AsideClock extends Component {
 
     NavItem = (props, state, context) => {
         let linkclasses = 'nav-link pb-0 pt-1'
-        if(this.state.active == props.name) {
+        if (this.state.active == props.name) {
             linkclasses += ' active'
         }
         return html`
             <li class="nav-item">
-                <a class=${linkclasses} href="#" onClick=${ev => {ev.preventDefault(); this.setActive(props.name)}} >
+                <a class=${linkclasses} href="#" onClick=${ev => {
+                    ev.preventDefault();
+                    this.setActive(props.name)
+                }}>
                     <span class="material-symbols-outlined icon-1x">${props.icon}</span>
                 </a>
             </li>
@@ -135,17 +138,17 @@ export default class AsideClock extends Component {
         let sunset = dayjs.unix(props.astro.sun.sunset)
 
         let spacer = ''
-        if(this.state.timezone === 'CEST') {
+        if (this.state.timezone === 'CEST') {
             spacer = '\u00A0'
         }
 
         return html`
             <ul class="nav nav-fill times-nav">
-                <${this.NavItem} name="clock" icon="schedule" />
-                <${this.NavItem} name="world" icon="public" />
-                <${this.NavItem} name="cal" icon="calendar_today" />
+                <${this.NavItem} name="clock" icon="schedule"/>
+                <${this.NavItem} name="world" icon="public"/>
+                <${this.NavItem} name="cal" icon="calendar_today"/>
             </ul>
-            
+
             ${this.state.active == 'clock' && html`
                 <div class="current-times times-section">
                     <span class="d-block">${this.state.timezone} ${this.state.date} ${this.state.time}</span>
@@ -156,12 +159,12 @@ export default class AsideClock extends Component {
             `}
             ${this.state.active == 'world' && html`
                 <div class="current-times times-section">
-                    <${this.WorldTime} />
+                    <${this.WorldTime}/>
                 </div>
             `}
             ${this.state.active == 'cal' && html`
                 <div class="times-section">
-                    <${Calendar3M} controls="above" />
+                    <${Calendar3M} controls="above"/>
                 </div>
             `}
         `

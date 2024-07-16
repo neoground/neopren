@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {Component, h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 import Form from "./Form.js"
 import Api from "./Api.js"
@@ -25,7 +25,7 @@ export default class Comments extends Component {
     }
 
     componentDidMount() {
-        if(this.props.comments) {
+        if (this.props.comments) {
             this.setState({
                 ...this.state,
                 comments: this.props.comments
@@ -34,7 +34,7 @@ export default class Comments extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(JSON.stringify(prevProps.comments) != JSON.stringify(this.props.comments) && this.props.comments) {
+        if (JSON.stringify(prevProps.comments) != JSON.stringify(this.props.comments) && this.props.comments) {
             // Comments prop changed -> update
             this.setState({
                 ...this.state,
@@ -49,7 +49,7 @@ export default class Comments extends Component {
     }
 
     saveComment = ev => {
-        if(this.state.comment.length > 1) {
+        if (this.state.comment.length > 1) {
             ev.preventDefault()
             Api.post('/api/comment', {
                 comment: this.state.comment,
@@ -71,7 +71,7 @@ export default class Comments extends Component {
     deleteComment = ev => {
         ev.preventDefault()
         let id = ev.currentTarget.dataset.id
-        if(id) {
+        if (id) {
             Modal.ShowConfirmationModal({
                 title: 'Delete comment',
                 description: 'Do you really want to delete this comment?',
@@ -84,7 +84,7 @@ export default class Comments extends Component {
 
                     Api.delete('/api/comment/' + id)
                         .then(data => {
-                            if(data && data.status && data.status == 'ok') {
+                            if (data && data.status && data.status == 'ok') {
                                 // Success
                                 this.setState({
                                     ...this.state,
@@ -105,14 +105,15 @@ export default class Comments extends Component {
             <div class="card card-body">
                 <div class="d-flex flex-row">
                     <div>
-                        <img src=${comment.user.profile_pic} alt="Avatar" class="rounded-circle" 
-                             style="max-height: 5rem; width: auto" />
+                        <img src=${comment.user.profile_pic} alt="Avatar" class="rounded-circle"
+                             style="max-height: 5rem; width: auto"/>
                     </div>
                     <div class="ms-3 flex-grow-1">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <h5 class="h5" title=${Format.DateLong(comment.created_at)}>
-                                    ${comment.user.display_name} • ${Format.DateForHumans(comment.created_at)}, ${Format.Time(comment.created_at)}</h5>
+                                    ${comment.user.display_name} • ${Format.DateForHumans(comment.created_at)},
+                                    ${Format.Time(comment.created_at)}</h5>
                             </div>
                             <div>
                                 ${comment.user.id == window.neopren.user.id && html`
@@ -134,25 +135,25 @@ export default class Comments extends Component {
             <div class="row text-start">
                 <div class="col-12 mb-2">
                     <h3 class="h3">
-                    ${this.state.comments.length < 1 && html`No Comments`}
-                    ${this.state.comments.length == 1 && html`1 Comment`}
-                    ${this.state.comments.length > 1 && html`${this.state.comments.length} Comments`}
+                        ${this.state.comments.length < 1 && html`No Comments`}
+                        ${this.state.comments.length == 1 && html`1 Comment`}
+                        ${this.state.comments.length > 1 && html`${this.state.comments.length} Comments`}
                     </h3>
                 </div>
                 <div class="col-12 mb-3">
                     <div>
-                        <${Form.Textarea} name="comment" value=${this.state.comment} change=${this.onInput} />
+                        <${Form.Textarea} name="comment" value=${this.state.comment} change=${this.onInput}/>
                     </div>
                     <div class="d-flex mt-3">
                         <button type="button" class="btn btn-primary btn-icon ms-auto" onClick=${this.saveComment}>
                             <span class="material-symbols-outlined me-2">add_comment</span> Add Comment
                         </button>
                     </div>
-                    
+
                 </div>
                 ${this.state.comments && this.state.comments.length > 0 && Object.entries(this.state.comments).map(([k, v]) => html`
                     <div class="col-12 mb-2">
-                        <${this.Comment} comment=${v} />
+                        <${this.Comment} comment=${v}/>
                     </div>
                 `)}
             </div>

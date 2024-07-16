@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 import Format from "./Format.js"
 

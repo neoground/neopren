@@ -24,13 +24,13 @@ export default class Tab {
             <nav>
                 <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
                     ${Object.entries(props.items).map(([k, v]) => html`
-                        <button class=${v.active ? "nav-link active btn-icon justify-content-center white-on-dark" 
-                                : "nav-link btn-icon justify-content-center white-on-dark"} 
+                        <button class=${v.active ? "nav-link active btn-icon justify-content-center white-on-dark"
+                                : "nav-link btn-icon justify-content-center white-on-dark"}
                                 id=${v.id + "-tab"}
                                 data-bs-toggle="tab"
-                                data-bs-target=${"#" + v.id} 
-                                type="button" 
-                                role="tab" 
+                                data-bs-target=${"#" + v.id}
+                                type="button"
+                                role="tab"
                                 onClick=${props.onClick}
                                 aria-selected=${v.active ? "true" : "false"}>${v.label}</button>
                     `)}
@@ -62,4 +62,3 @@ export default class Tab {
     }
 
 }
-

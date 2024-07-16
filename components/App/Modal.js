@@ -23,7 +23,8 @@ export default class Modal extends Component {
             cancelText: 'Abbrechen',
             title: '',
             description: '',
-            onConfirm: () => {},
+            onConfirm: () => {
+            },
             onCancel: (ev) => {
                 ev.preventDefault()
                 DynamicComponent.hideModal(ev.currentTarget.dataset.modalid)
@@ -36,7 +37,7 @@ export default class Modal extends Component {
         let render_element = document.createElement('div')
         document.body.appendChild(render_element)
 
-        if(render_element !== null) {
+        if (render_element !== null) {
             render(html`
                 <${Modal.Confirmation}
                         id=${config.id}
@@ -47,12 +48,12 @@ export default class Modal extends Component {
                         oncancel=${config.onCancel}
                         style=${config.style}
                 >
-                    <span innerHTML=${config.description} />
+                    <span innerHTML=${config.description}/>
                 </EXTERNAL_FRAGMENT>
             `, render_element)
 
             let modalel = document.getElementById(config.id)
-            if(modalel) {
+            if (modalel) {
                 let modal = bootstrap.Modal.getOrCreateInstance(modalel)
                 modal.show()
             }
@@ -63,15 +64,15 @@ export default class Modal extends Component {
         let cancel_text = 'Abbrechen'
         let confirm_text = 'Ok'
 
-        if(props.confirmtext) {
+        if (props.confirmtext) {
             confirm_text = props.confirmtext
         }
-        if(props.canceltext) {
+        if (props.canceltext) {
             cancel_text = props.canceltext
         }
 
         let style = 'primary'
-        if(props.style) {
+        if (props.style) {
             style = props.style
         }
 
@@ -87,12 +88,12 @@ export default class Modal extends Component {
                             ${props.children}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" onClick=${props.oncancel} 
+                            <button type="button" class="btn btn-secondary" onClick=${props.oncancel}
                                     data-modalid=${props.id}>
-                                <span class="d-flex" innerHTML=${cancel_text} /></button>
-                            <button type="button" class=${"btn text-white btn-" + style} onClick=${props.onconfirm} 
+                                <span class="d-flex" innerHTML=${cancel_text}/></button>
+                            <button type="button" class=${"btn text-white btn-" + style} onClick=${props.onconfirm}
                                     data-modalid=${props.id}>
-                                <span class="d-flex" innerHTML=${confirm_text} /></button>
+                                <span class="d-flex" innerHTML=${confirm_text}/></button>
                         </div>
                     </div>
                 </div>
@@ -102,7 +103,7 @@ export default class Modal extends Component {
 
     render(props, state, context) {
         let dialog_classes = 'modal-dialog modal-dialog-centered'
-        if(props.size && props.size != "initial") {
+        if (props.size && props.size != "initial") {
             dialog_classes += ' modal-' + props.size
         }
 

@@ -1,5 +1,5 @@
-import {h, createContext} from '../../node_modules/preact/dist/preact.module.js'
-import {useState, useContext, useEffect} from '../../node_modules/preact/hooks/dist/hooks.module.js'
+import {createContext, h} from '../../node_modules/preact/dist/preact.module.js'
+import {useContext, useEffect, useState} from '../../node_modules/preact/hooks/dist/hooks.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 
 const html = htm.bind(h)
@@ -31,7 +31,7 @@ class Translator {
  *
  * Providing translations defined in ../../locales/$lang/$section.json
  */
-export function LocalizationProvider({ children, language = window.neopren.app_language, sections = [] }) {
+export function LocalizationProvider({children, language = window.neopren.app_language, sections = []}) {
     const [translator, setTranslator] = useState(new Translator(language));
     const [translations, setTranslations] = useState({});
 
@@ -40,9 +40,10 @@ export function LocalizationProvider({ children, language = window.neopren.app_l
             const initialSections = ['main', ...sections]; // Define initial sections to load
             for (let section of initialSections) {
                 const sectionTranslations = await translator.loadSection(section);
-                setTranslations(prev => ({ ...prev, ...sectionTranslations }));
+                setTranslations(prev => ({...prev, ...sectionTranslations}));
             }
         }
+
         loadInitialTranslations();
     }, [language]);
 

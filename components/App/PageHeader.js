@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {Component, h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 import '../../node_modules/dayjs/dayjs.min.js'
 

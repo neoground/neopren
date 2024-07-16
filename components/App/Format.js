@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 import '../../node_modules/dayjs/dayjs.min.js'
 import '../../node_modules/dayjs/locale/de.js'
@@ -11,7 +11,7 @@ const html = htm.bind(h)
 export default class Format {
 
     static Money = (number, currency = 'EUR') => {
-        return new Intl.NumberFormat('de-DE', { style: 'currency', currency: currency }).format(number)
+        return new Intl.NumberFormat('de-DE', {style: 'currency', currency: currency}).format(number)
     }
 
     static Frequency = freq => {
@@ -75,7 +75,7 @@ export default class Format {
     }
 
     static DateDiff = (date) => {
-        if(this.Today().diff(date, 'day') < 366) {
+        if (this.Today().diff(date, 'day') < 366) {
             let months = this.Today().diff(date, 'month')
             let days = this.Today().diff(date.add(months, 'month'), 'day')
 
@@ -116,7 +116,7 @@ export default class Format {
             ago: 'vor',
             weeks: 'Wochen'
         }
-        if(output == 'short') {
+        if (output == 'short') {
             strings = {
                 ...strings,
                 days: 'Tg.',
@@ -124,35 +124,35 @@ export default class Format {
             }
         }
 
-        if(date.isSame(now, 'day')) {
+        if (date.isSame(now, 'day')) {
             return strings.today
         }
 
         let daydiff = date.diff(now, 'day', true)
         daydiff = Math.ceil(daydiff)
 
-        if(daydiff < 0) {
+        if (daydiff < 0) {
             isFuture = false
             daydiff *= -1
         }
 
-        if(daydiff == 1) {
+        if (daydiff == 1) {
             return isFuture ? strings.tomorrow : strings.yesterday
         }
-        if(daydiff == 2) {
+        if (daydiff == 2) {
             return isFuture ? strings.tomorrow2 : strings.yesterday2
         }
 
-        if(daydiff < 14) {
+        if (daydiff < 14) {
             return isFuture ? strings.in + ' ' + daydiff + ' ' + strings.days : strings.ago + ' ' + daydiff + ' ' + strings.days
         }
 
         let weekdiff = date.diff(now, 'week')
-        if(weekdiff < 0) {
+        if (weekdiff < 0) {
             weekdiff *= -1
         }
 
-        if(daydiff < 60) {
+        if (daydiff < 60) {
             return isFuture ? strings.in + ' ' + weekdiff + ' ' + strings.weeks : strings.ago + ' ' + weekdiff + ' ' + strings.weeks
         }
 
@@ -168,7 +168,7 @@ export default class Format {
         let half_stars = 0
 
         let stars = []
-        switch(rating) {
+        switch (rating) {
             case 1:
                 stars = ['half', 'empty', 'empty', 'empty', 'empty']
                 break
@@ -203,23 +203,26 @@ export default class Format {
         }
 
         let fontSize = "2rem"
-        if(props.fontsize) {
+        if (props.fontsize) {
             fontSize = props.fontsize
         }
 
         return html`
             <span class="text-center">
                 ${Object.values(stars).map(star => html`
-                    ${star === 'empty' && html`<span class="material-symbols-outlined opacity-25 me-1 d-inline" style=${"font-size: " + fontSize}>star</span>`}
-                    ${star === 'half' && html`<span class="material-symbols-outlined me-1 d-inline" style=${"font-size: " + fontSize}>star_half</span>`}
-                    ${star === 'full' && html`<span class="material-symbols-outlined me-1 d-inline" style=${"font-size: " + fontSize}>star</span>`}
+                    ${star === 'empty' && html`<span class="material-symbols-outlined opacity-25 me-1 d-inline"
+                                                     style=${"font-size: " + fontSize}>star</span>`}
+                    ${star === 'half' && html`<span class="material-symbols-outlined me-1 d-inline"
+                                                    style=${"font-size: " + fontSize}>star_half</span>`}
+                    ${star === 'full' && html`<span class="material-symbols-outlined me-1 d-inline"
+                                                    style=${"font-size: " + fontSize}>star</span>`}
                 `)}
             </span>
         `
     }
 
     static MarkdownToHtml = (content) => {
-        if(typeof content == 'undefined' || content == null) {
+        if (typeof content == 'undefined' || content == null) {
             // Empty content
             return ''
         }
@@ -373,13 +376,13 @@ export default class Format {
         let base = 1
         let suffix = ''
 
-        if(num >= 1e9) {
+        if (num >= 1e9) {
             base = 1e9
             suffix = 'B'
-        } else if(num >= 1e6) {
+        } else if (num >= 1e6) {
             base = 1e6
             suffix = 'M'
-        } else if(num >= 1e3) {
+        } else if (num >= 1e3) {
             base = 1e3
             suffix = 'K'
         }
@@ -417,7 +420,7 @@ export default class Format {
      */
     static nl2br = (str, replaceMode) => {
         let breakTag = '<br />'
-        let replaceStr = (replaceMode) ? '$1'+ breakTag : '$1'+ breakTag +'$2'
+        let replaceStr = (replaceMode) ? '$1' + breakTag : '$1' + breakTag + '$2'
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, replaceStr)
     }
 

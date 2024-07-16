@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 
 const html = htm.bind(h);
@@ -18,13 +18,13 @@ export default class HelperElements {
      */
     static clickableLinks = (props) => {
         let content = props.children
-        if(!content) {
+        if (!content) {
             return html`<span></span>`
         }
-        if(props.escape !== "false") {
+        if (props.escape !== "false") {
             content = this.escapeHtml(content)
         }
-        if(props.nl2br === "true") {
+        if (props.nl2br === "true") {
             content = content.replaceAll("\n", "<br />")
         }
 
@@ -32,7 +32,7 @@ export default class HelperElements {
         content = content.replaceAll(/(http:\/\/[^\s]+)/g, "<a href='$1' target='_blank'>$1</a>")
         content = content.replaceAll(/(https:\/\/[^\s]+)/g, "<a href='$1' target='_blank'>$1</a>")
 
-        return html`<span innerHTML=${content} />`
+        return html`<span innerHTML=${content}/>`
     }
 
     /**
@@ -49,7 +49,7 @@ export default class HelperElements {
     static zipEntry = (props, state, context) => {
         let el = props.el
         return html`
-            <strong class="me-2">${el.zip}</strong> ${el.city} <br />
+            <strong class="me-2">${el.zip}</strong> ${el.city} <br/>
             <span class="small text-muted">${el.area} • ${el.state}</span>
         `
     }

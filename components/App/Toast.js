@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {Component, h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 
 const html = htm.bind(h);
@@ -19,7 +19,7 @@ const html = htm.bind(h);
 export default class Toast extends Component {
     render(props, state, context) {
         let dialog_classes = 'modal-dialog modal-dialog-centered'
-        if(props.size && props.size != "initial") {
+        if (props.size && props.size != "initial") {
             dialog_classes += ' modal-' + props.size
         }
 

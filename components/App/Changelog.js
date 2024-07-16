@@ -28,13 +28,12 @@ export default class Changelog extends Component {
         this.modal.show()
     }
 
-    initChangelogFor(model, id)
-    {
+    initChangelogFor(model, id) {
         // Fetch all data via API
         fetch(window.neopren.baseUrl + '/api/changes?model=' + model + '&id=' + id)
             .then(response => response.json())
             .then(data => {
-                if(data.changes) {
+                if (data.changes) {
                     this.setState({
                         ...this.state,
                         model: model,
@@ -62,7 +61,7 @@ export default class Changelog extends Component {
 
     render(props, state, context) {
         return html`
-            <a href="#" class="btn btn-primary btn-icon position-relative me-2 mb-3" 
+            <a href="#" class="btn btn-primary btn-icon position-relative me-2 mb-3"
                style="overflow: initial" onClick=${this.buttonClickEvent}>
                 <span class="material-symbols-outlined">history</span> Änderungen
                 ${state.count > 0 && html`
@@ -78,7 +77,8 @@ export default class Changelog extends Component {
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">${props.count} Änderungen</h5>
-                            <button type="button" class="btn-close" onClick=${this.closeModal} aria-label="Close"></button>
+                            <button type="button" class="btn-close" onClick=${this.closeModal}
+                                    aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
 
@@ -87,7 +87,9 @@ export default class Changelog extends Component {
                                 ${state.changes && state.changes.map(change => html`
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id=${"heading-" + change.id}>
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target=${"#collapse-" + change.id} aria-expanded="false" aria-controls=${"collapse-" + change.id}>
+                                            <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target=${"#collapse-" + change.id}
+                                                    aria-expanded="false" aria-controls=${"collapse-" + change.id}>
                                                 <div class="row w-100">
                                                     <div class="col-3">
                                                         <span class="badge bg-primary">${change.id}</span>
@@ -98,11 +100,14 @@ export default class Changelog extends Component {
                                                     <div class="col-3" title=${change.date_full}>
                                                         ${change.date}
                                                     </div>
-                                                    <div class="col-3 pe-3">${Object.keys(change.diff).length} Änderung${Object.keys(change.diff).length != 1 && html`en`}</div>
+                                                    <div class="col-3 pe-3">${Object.keys(change.diff).length}
+                                                            Änderung${Object.keys(change.diff).length != 1 && html`en`}
+                                                    </div>
                                                 </div>
                                             </button>
                                         </h2>
-                                        <div id=${"collapse-" + change.id} class="accordion-collapse collapse" aria-labelledby=${"heading-" + change.id} data-bs-parent="#accordion">
+                                        <div id=${"collapse-" + change.id} class="accordion-collapse collapse"
+                                             aria-labelledby=${"heading-" + change.id} data-bs-parent="#accordion">
                                             <div class="accordion-body">
                                                 ${change.comment && html`<p>${change.comment}</p>`}
                                                 <table class="table table-striped changelog-table">
@@ -121,10 +126,10 @@ export default class Changelog extends Component {
                                 `)}
 
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         `
@@ -133,6 +138,7 @@ export default class Changelog extends Component {
 }
 
 let render_element = document.getElementById("changelog");
-if(render_element !== null) {
-    render(html`<${Changelog} model=${render_element.dataset.model} modelid=${render_element.dataset.id} />`, render_element);
+if (render_element !== null) {
+    render(html`
+        <${Changelog} model=${render_element.dataset.model} modelid=${render_element.dataset.id}/>`, render_element);
 }

@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 
 const html = htm.bind(h)
@@ -15,7 +15,7 @@ export default class Api {
         console.debug('API ' + method + ': ' + url)
 
         // Make body a JSON string if set
-        if(typeof body === 'object' || Array.isArray(body)) {
+        if (typeof body === 'object' || Array.isArray(body)) {
             body = JSON.stringify(body)
         }
 
@@ -29,7 +29,7 @@ export default class Api {
             redirect: 'follow',
         }
 
-        if(body) {
+        if (body) {
             config.body = body
         }
 
@@ -52,7 +52,7 @@ export default class Api {
     }
 
     static buildUrl = (url) => {
-        if(url.includes('://')) {
+        if (url.includes('://')) {
             // Full URL already provided
             return url
         }

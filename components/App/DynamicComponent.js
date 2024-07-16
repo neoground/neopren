@@ -1,4 +1,4 @@
-import {Component, h, render} from '../../node_modules/preact/dist/preact.module.js'
+import {h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
 import '../../node_modules/dayjs/dayjs.min.js'
 import '../../node_modules/dayjs/locale/de.js'
@@ -24,14 +24,14 @@ export default class DynamicComponent {
 
     static changeModal = (action, id) => {
         let modal = document.getElementById(id)
-        if(modal) {
+        if (modal) {
             let bsModal = bootstrap.Modal.getOrCreateInstance(modal)
 
-            if(action == 'show') {
+            if (action == 'show') {
                 bsModal.show()
-            } else if(action == 'hide') {
+            } else if (action == 'hide') {
                 bsModal.hide()
-            } else if(action == 'toggle') {
+            } else if (action == 'toggle') {
                 bsModal.toggle()
             }
 
@@ -43,9 +43,9 @@ export default class DynamicComponent {
 
     static showToast = (id) => {
         let el = document.getElementById(id)
-        if(el !== null) {
+        if (el !== null) {
             let toast = bootstrap.Toast.getOrCreateInstance(el)
-            if(toast !== null) {
+            if (toast !== null) {
                 toast.show()
                 return toast
             }
@@ -56,9 +56,9 @@ export default class DynamicComponent {
 
     static hideToast = (id) => {
         let el = document.getElementById(id)
-        if(el !== null) {
+        if (el !== null) {
             let toast = bootstrap.Toast.getOrCreateInstance(el)
-            if(toast !== null) {
+            if (toast !== null) {
                 toast.hide()
                 return toast
             }
