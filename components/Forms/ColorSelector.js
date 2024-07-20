@@ -47,8 +47,7 @@ export default class ColorSelector extends Component {
             return html`
                 <div class="mb-2">
                     <button type="button" class=${btnclass} onClick=${this.onColorSelect} data-color="">
-                        <span class="material-symbols-outlined text-black white-on-dark"
-                              style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">circle</span>
+                        <span class="material-symbols-outlined text-black white-on-dark symbol-fill">circle</span>
                     </button>
                 </div>
             `
@@ -57,8 +56,7 @@ export default class ColorSelector extends Component {
         return html`
             <div class="mb-2">
                 <button type="button" class=${btnclass} onClick=${this.onColorSelect} data-color=${props.color}>
-                    <span class=${"material-symbols-outlined text-" + props.color}
-                          style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">circle</span>
+                    <span class=${"material-symbols-outlined symbol-fill text-" + props.color}>circle</span>
                 </button>
             </div>
         `
@@ -67,21 +65,19 @@ export default class ColorSelector extends Component {
     SelectedColorIcon = (props, state, context) => {
         if (props.color == 'custom') {
             return html`
-                <span class="material-symbols-outlined" 
-                      style=${"font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; color: " + props.custom_color}>circle</span>
+                <span class="material-symbols-outlined symbol-fill"
+                      style=${"color: " + props.custom_color}>circle</span>
             `
         }
 
         if (!props.color || props.color == '') {
             return html`
-                <span class="material-symbols-outlined text-black white-on-dark"
-                      style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">circle</span>
+                <span class="material-symbols-outlined text-black white-on-dark symbol-fill">circle</span>
             `
         }
 
         return html`
-            <span class=${"material-symbols-outlined text-" + props.color}
-                  style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">circle</span>
+            <span class=${"material-symbols-outlined symbol-fill text-" + props.color}>circle</span>
         `
     }
 

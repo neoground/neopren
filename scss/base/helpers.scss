@@ -31,18 +31,21 @@
     font-size: 1.4rem;
 }
 
-// Icons are often needed at 1rem
-.icon-1x {
+// Symbols are often needed at smaller sizes + filled
+.icon-1x, .symbol-1x {
     font-size: 1rem !important;
 }
-.icon-1-25x {
+.icon-1-25x, .symbol-1-25x {
     font-size: 1.25rem !important;
 }
-.icon-1-5x {
+.icon-1-5x, .symbol-1-5x {
     font-size: 1.5rem !important;
 }
+.symbol-fill {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
 
-// Remove focus styles (unneeded border around active element)
+    // Remove focus styles (unneeded border around active element)
 :focus-visible {
     outline: 0;
     box-shadow: none;
