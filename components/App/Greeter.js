@@ -6,20 +6,37 @@ const html = htm.bind(h)
 
 /**
  * Greetings, buddy!
- *
- * Currently only in German, soon multilingual...
  */
 export default class Greeter {
+    static TimeOfDay = () => {
+        let d = Format.Today()
+        if (d.hour() >= 5 && d.hour() < 12) {
+            return 'm'
+        } else if (d.hour() >= 12 && d.hour() < 18) {
+            return 'd'
+        } else if (d.hour() < 5 || d.hour() === 23) {
+            return 'n'
+        }
+
+        return 'e'
+    }
+
     static Greet = (props, state, context) => {
 
         let d = Format.Today()
         let greeting = 'Guten Abend'
 
         // Time specific
-        if (d.hour() >= 0 && d.hour() < 12) {
-            greeting = 'Guten Morgen'
-        } else if (d.hour() >= 12 && d.hour() < 18) {
-            greeting = 'Guten Tag'
+        switch (this.TimeOfDay()) {
+            case 'm':
+                greeting = 'Guten Morgen'
+                break
+            case 'd':
+                greeting = 'Guten Tag'
+                break
+            case 'n':
+                greeting = 'Gute Nacht'
+                break
         }
 
         // Christmas override (months are starting with 0)
@@ -39,7 +56,6 @@ export default class Greeter {
         // We really miss the easter_date method of PHP in here... meh.
         if (d.month() === 2 || d.month() === 3) {
             let easter_dates = {
-                2024: '2024-03-31',
                 2025: '2025-04-20',
                 2026: '2026-04-05',
                 2027: '2027-03-28',
@@ -79,18 +95,53 @@ export default class Greeter {
 
     static Subline = (props, state, context) => {
         let d = Format.Today()
-        let sub = "Heute ist " + d.format('dddd, [der] DD. MMMM YYYY')
-
-        if (d.day() === 0 || d.day() === 6) {
-            sub += ". Genieße das Wochenende!"
-        } else if (d.day() === 1) {
-            sub += ". Starte gut in die Woche!"
-        } else if (d.day() === 5) {
-            sub += ". Starte gut ins Wochenende!"
+        let texts = {
+            0: {
+                m: 'Ein entspannter Sonntag beginnt.',
+                d: 'Hoffentlich hast du einen erholsamen Sonntag.',
+                e: 'Bereite dich in Ruhe auf die neue Woche vor',
+                n: 'Nutze die Ruhe vor dem Wochenstart.'
+            },
+            1: {
+                m: 'Bereit für eine erfolgreiche Woche?',
+                d: 'Lass uns diese Woche großartig starten!',
+                e: 'Zeit, den Tag ausklingen zu lassen.',
+                n: 'Die Nacht ist jung, lass uns aktiv sein.'
+            },
+            2: {
+                m: 'Der zweite Tag der Woche wartet.',
+                d: 'Ein guter Tag für neue Herausforderungen.',
+                e: 'Gute Arbeit, Zeit zum entspannen.',
+                n: 'Ein weiterer Abend für großartige Ideen.'
+            },
+            3: {
+                m: 'Wir sind schon in der Mitte der Woche.',
+                d: 'Das Wochenende ist nicht mehr weit.',
+                e: 'Ein erfolgreicher Tag liegt hinter dir.',
+                n: 'Halte durch, die Woche ist bald geschafft.'
+            },
+            4: {
+                m: 'Bald geschafft, morgen ist schon Freitag.',
+                d: 'Heute ist ein guter Tag für Fortschritt.',
+                e: 'Nur noch ein Tag bis zum Wochenende.',
+                n: 'Noch ein letzter Push vor dem Wochenende.'
+            },
+            5: {
+                m: 'Der Freitag ist da, das Wochenende naht.',
+                d: 'Starte gut ins Wochenende!',
+                e: 'Das Wochenende ist da, genieße es!',
+                n: 'Das Wochenende hat begonnen!'
+            },
+            6: {
+                m: 'Ein schöner Samstag liegt vor dir.',
+                d: 'Genieße deinen Samstag!',
+                e: 'Entspanne dich und lade deine Batterien auf.',
+                n: 'Habe eine entspannte Samstagnacht!'
+            }
         }
 
         return html`
-            ${sub}
+            Heute ist ${d.format('dddd, [der] DD. MMMM YYYY')}. ${texts[d.day()][this.TimeOfDay()]}
         `
     }
 
