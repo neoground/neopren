@@ -59,8 +59,12 @@
 .sidebar-is-hidden .content-section {
     width: 100vw;
 }
-.sidebar-is-visible .content-section {
-    width: calc(100vw - #{$sidebar-width});
+
+// Adjusted width on visible aside (not for mobile when aside is an overlay)
+@include media-breakpoint-up(lg) {
+    .sidebar-is-visible .content-section {
+        width: calc(100vw - #{$sidebar-width});
+    }
 }
 
 .content-section {
@@ -216,4 +220,22 @@
         min-height: calc(100vh - #{$header-height}) !important;
         max-height: calc(100vh - #{$header-height}) !important;
     }
+}
+
+// Spacers
+// ---------------------------------------------------------------------------
+
+.spacer-3x {
+    width: 100%;
+    height: 12rem;
+}
+
+.spacer-2x {
+    width: 100%;
+    height: 8rem;
+}
+
+.spacer-1x, .section-spacer {
+    width: 100%;
+    height: 4rem;
 }

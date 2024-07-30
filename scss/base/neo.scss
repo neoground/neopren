@@ -2,6 +2,14 @@
 // |    _neo.scss            Neopren base style and bootstrap adjustments    |
 // +-------------------------------------------------------------------------+
 
+// General typography
+// ---------------------------------------------------------------------------
+
+body {
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures;
+}
+
 // Small, global elements and bootstrap component adjustments
 // ---------------------------------------------------------------------------
 
