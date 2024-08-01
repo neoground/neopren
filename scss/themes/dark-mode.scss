@@ -1,0 +1,211 @@
+// +-------------------------------------------------------------------------+
+// |    dark-mode.scss                                    Dark mode style    |
+// +-------------------------------------------------------------------------+
+
+@mixin dark-mode-properties {
+    $dark: $m-grey-900;
+    $light: $m-grey-700;
+
+    $theme-colors: (
+            "primary": $primary,
+            "secondary": $secondary,
+            "success": $success,
+            "danger": $danger,
+            "info": $info,
+            "dark": $dark,
+            "light": $light,
+    );
+
+    /* redefine theme color variables */
+    @each $color, $value in $theme-colors {
+        --#{$variable-prefix}#{$color}: #{$value};
+    }
+
+    /* redefine theme color rgb vars (used for bg- colors) */
+    $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+
+    @each $color, $value in $theme-colors-rgb {
+        --#{$variable-prefix}#{$color}-rgb: #{$value};
+    }
+
+    $body-color: #eeeeee;
+    $body-bg: $m-blue-grey-800;
+
+    --#{$variable-prefix}body-color: #{$body-color};
+    --#{$variable-prefix}body-bg: #{$body-bg};
+    --bs-table-striped-color: #{$body-color} !important;
+    --bs-table-active-color: #{$body-color};
+    --bs-table-hover-color: #{$body-color};
+
+    .card, .modal-content {
+        background: $m-blue-grey-700;
+
+        a:not(.btn) {
+            color: $primary;
+        }
+    }
+
+    .table, .table > :not(caption) > * > * {
+        --bs-table-color-state: #{$body-color};
+    }
+
+    .pagination .page-link {
+        background: $m-blue-grey-900;
+        color: $m-blue-grey-100;
+        border: 1px solid $m-blue-grey-600;
+
+        &:hover {
+            background: $m-blue-grey-800;
+        }
+    }
+    .pagination .page-item.active .page-link {
+        background: $primary;
+    }
+
+    .dropdown-menu, .dropdown-item {
+        background: $m-grey-900;
+        color: $m-grey-400;
+
+        &.active {
+            background: var(--bs-primary);
+            color: $white;
+        }
+    }
+
+    .list-group-item-action:hover, .list-group-item-action:focus {
+        background-color: lighten($m-blue-grey-700, 3);
+    }
+    .list-group {
+        --bs-list-group-border-color: #{$body-bg};
+    }
+
+    .sidebar .nav-link {
+        color: $m-grey-200;
+
+        .mi, .material-symbols-outlined {
+            color: $m-grey-400;
+        }
+    }
+
+    .text-muted, .sidebar .mi-icon, .form-text {
+        color: $m-grey-300 !important;
+    }
+
+    .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+    }
+
+    .sidebar {
+        .list-group-item {
+            color: $m-grey-100;
+        }
+    }
+
+    .main-content, .table {
+        color: $m-grey-100;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(2n+1) > * {
+        color: inherit;
+    }
+
+    .form-control {
+        color: $m-blue-grey-50;
+        background: $m-blue-grey-800;
+        border: 1px solid $m-blue-grey-100;
+
+        &:focus, &:active {
+            border: 1px solid $white;
+            background-color: $m-blue-grey-700 !important;
+        }
+    }
+    .input-group-text {
+        background-color: inherit;
+    }
+
+    .toast {
+        background-color: rgba(64, 64, 64, .85);
+    }
+    .toast-header {
+        background-color: rgba(32, 32, 32, .85);
+        color: $white;
+    }
+
+    .popover-header {
+        background-color: rgba($m-blue-grey-800, .85);
+    }
+    .popover {
+        background-color: rgba($m-blue-grey-700, .85);
+    }
+    .popover-body {
+        color: $m-blue-grey-50;
+    }
+    .popover-arrow::after {
+        border-top-color: $m-blue-grey-700 !important;
+    }
+
+    .text-dark {
+        color: $m-grey-100 !important;
+    }
+
+    .accordion-item {
+        background: $m-blue-grey-800;
+    }
+    .accordion-button {
+        background: $m-blue-grey-600;
+        color: $white;
+    }
+    .accordion-button:not(.collapsed) {
+        background: $m-blue-grey-400;
+        color: $white;
+    }
+
+    .list-group-item {
+        background: $m-blue-grey-700;
+        color: $m-blue-grey-50;
+
+        &.active {
+            background-color: $primary;
+        }
+    }
+
+    a.list-group-item {
+        &:active {
+            background: $m-blue-grey-600;
+        }
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        background-color: $m-grey-800;
+        color: $white;
+    }
+
+    .white-on-dark {
+        color: #fff !important;
+    }
+
+    .show-on-darkmode {
+        display: flex !important;
+    }
+    .show-on-lightmode {
+        display: none !important;
+    }
+
+    .progress {
+        background-color: $m-blue-grey-200;
+    }
+}
+
+// Global dark theme
+// ---------------------------------------------------------------------------
+.dark {
+    @include dark-mode-properties;
+}
+
+// Dark theme as auto theme if user prefers dark color scheme
+// ---------------------------------------------------------------------------
+@media (prefers-color-scheme: dark) {
+    .auto-theme {
+        @include dark-mode-properties;
+    }
+}
