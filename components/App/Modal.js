@@ -88,12 +88,12 @@ export default class Modal extends Component {
                             ${props.children}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" onClick=${props.oncancel}
+                            <button type="button" class="btn btn-secondary" onClick=${(e) => {props.oncancel(e, props.id)}}
                                     data-modalid=${props.id}>
-                                <span class="d-flex" innerHTML=${cancel_text}/></button>
-                            <button type="button" class=${"btn text-white btn-" + style} onClick=${props.onconfirm}
+                                <span class="d-flex" innerHTML=${cancel_text} /></button>
+                            <button type="button" class=${"btn text-white btn-" + style} onClick=${(e) => {props.onconfirm(e, props.id)}}
                                     data-modalid=${props.id}>
-                                <span class="d-flex" innerHTML=${confirm_text}/></button>
+                                <span class="d-flex" innerHTML=${confirm_text} /></button>
                         </div>
                     </div>
                 </div>
