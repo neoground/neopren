@@ -1,6 +1,6 @@
 import {Component, h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
-import Api from "./Api.js"
+import Api from "./Api.js";
 
 const html = htm.bind(h)
 
@@ -9,7 +9,7 @@ const html = htm.bind(h)
  *
  * Example usage:
  *
- * <${Autocomplete} entries=${ {foo: 'bar', duke: 'nukem'} } or entriesApi=${"https..."} (object of entries or URL to API endpoint)
+ * <${Autocomplete} entries=${ [{key: '1', value: 'duke'},{key: '2', value: 'nukem'},...] } or entriesApi=${"https..."} (object of entries or URL to API endpoint)
  *                  onSelect=${this.handleSelection} (on selection this will be called, has a parameter "el" with object from api)
  *                  renderEntry=${this.renderEntry} (render entry in autocomplete list, has "props.el" with object from api)
  *                  value=${this.state.customValue} (update this value to update it in input as well)
