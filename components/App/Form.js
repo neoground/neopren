@@ -20,9 +20,10 @@ export default class Form {
             changehandler = (e) => props.change(e)
         }
 
+        let focusouthandler = props.focusout
+
         return html`
-            <input type=${type} class="form-control" id=${"input-" + props.name} name=${props.name} value=${props.value}
-                   onInput=${changehandler} ...${params}/>
+            <input type=${type} class="form-control" id=${"input-" + props.name} name=${props.name} value=${props.value} onInput=${changehandler} onFocusOut=${focusouthandler} ...${params} />
         `
     }
 
