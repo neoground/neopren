@@ -12,6 +12,7 @@ const html = htm.bind(h)
  * - onSelect (callback with color name OR custom hex code as parameter + optional fields list as string)
  * - color (selected color)
  * - custom_color (custom color hex code if color is 'custom')
+ * - disableCustom (bool, set it to disable custom color selection)
  */
 export default class ColorSelector extends Component {
     state = {
@@ -103,23 +104,24 @@ export default class ColorSelector extends Component {
                                 </div>
                             `)}
                         `)}
-                        <div class="col-6">
-                            <div>
-                                <button type="button"
-                                        class=${this.props.color == 'custom' ? 'btn btn-primary w-100' : 'btn btn-outline-primary w-100'}
-                                        onClick=${this.onColorSelect} data-color="custom">
-                                    Eigene
-                                </button>
+                        ${!this.props.disableCustom && html`
+                            <div class="col-6">
+                                <div>
+                                    <button type="button"
+                                            class=${this.props.color == 'custom' ? 'btn btn-primary w-100' : 'btn btn-outline-primary w-100'}
+                                            onClick=${this.onColorSelect} data-color="custom">
+                                        Eigene
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6 d-flex align-items-center">
-                            ${this.props.color == 'custom' && html`
-                                <${Form.Input} type="color" name="custom_color" value=${this.props.custom_color}
-                                               change=${this.onCustomInput}
-                                               params=${JSON.stringify({style: 'height: 100%;'})}/>
-                            `}
-                        </div>
-
+                            <div class="col-6 d-flex align-items-center">
+                                ${this.props.color == 'custom' && html`
+                                    <${Form.Input} type="color" name="custom_color" value=${this.props.custom_color}
+                                                   change=${this.onCustomInput}
+                                                   params=${JSON.stringify({style: 'height: 100%;'})}/>
+                                `}
+                            </div>
+                        `}
                     </div>
                 </div>
             </div>
