@@ -22,8 +22,15 @@ export default class Form {
 
         let focusouthandler = props.focusout
 
+        let classes = "form-control"
+        if (props.class) {
+            classes += " " + props.class
+        }
+
         return html`
-            <input type=${type} class="form-control" id=${"input-" + props.name} name=${props.name} value=${props.value} onInput=${changehandler} onFocusOut=${focusouthandler} ...${params} />
+            <input type=${type} class=${classes} id=${"input-" + props.name}
+                   name=${props.name} value=${props.value}
+                   onInput=${changehandler} onFocusOut=${focusouthandler} ...${params}/>
         `
     }
 
