@@ -66,6 +66,8 @@ export default class FileUpload extends Component {
         this.setState({ files: [...this.state.files, ...files], isDragging: false }, () => {
             if (this.state.files.length === 1 && files[0].type.startsWith('image/') && this.props.enableCropping) {
                 this.startCropping(0);
+            } else {
+                this.callOnFileProp()
             }
         });
     };
@@ -113,6 +115,16 @@ export default class FileUpload extends Component {
         });
     };
 
+    callOnFileProp = () => {
+        // Call onFile prop if set and pass files object
+        if(this.props.onFile) {
+            this.getFilesData()
+                .then(data => {
+                    this.props.onFile(data)
+                })
+        }
+    }
+
 
     compressAndAddFile = (file, index) => {
         new Compressor(file, {
@@ -124,14 +136,19 @@ export default class FileUpload extends Component {
                 files[index] = compressedFile;
 
                 this.cropper.destroy();
-                this.setState({ files: files, cropping: false, croppedDataUrl: null, currentFileIndex: null });
+                this.setState({ files: files, cropping: false, croppedDataUrl: null, currentFileIndex: null }, () => {
+                    this.callOnFileProp()
+                });
             }
         });
     };
 
     removeFile = (index) => {
         const files = this.state.files.filter((_, i) => i !== index);
-        this.setState({files});
+        this.setState({files}, () => {
+            // Since files changed also notify parent
+            this.callOnFileProp()
+        });
     };
 
     // Convert file to base64 string
