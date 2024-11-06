@@ -194,6 +194,10 @@
     .progress {
         background-color: $m-blue-grey-200;
     }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: $m-blue-grey-200;
+    }
 }
 
 // Global dark theme
