@@ -28,6 +28,7 @@ export default class Form {
         }
 
         return html`
+            ${props.label && html`<${this.Label} ...${props} />`}
             <input type=${type} class=${classes} id=${"input-" + props.name}
                    name=${props.name} value=${props.value}
                    onInput=${changehandler} onFocusOut=${focusouthandler} ...${params}/>
@@ -43,25 +44,49 @@ export default class Form {
         }
 
         return html`
+            ${props.label && html`<${this.Label} ...${props} />`}
             <textarea class="form-control" id=${"input-" + props.name} name=${props.name} rows=${rows}
                       value=${props.value} onInput=${props.change} ...${params}/>
         `
     }
 
+    /**
+     * Select form component
+     *
+     * Props:
+     *
+     * - `name` input name
+     * - `value` selected value
+     * - `label` to set a label
+     * - `size="lg"` to make it a form-control-lg
+     * - `placeholder` with a placeholder value, will be disabled default option
+     * - `filterEmpty=${true}` to filter out empty options
+     * - `orderby="value"` to order options by value (default: by key)
+     * - `params=${obj}` object with parameters to pass to <select> HTML element
+     * - `change=${callback}` called onInput, passes event to it (get value via event.target.value, name via event.target.name)
+     */
     static Select = (props, state, context) => {
         let params = this.getParams(props.params)
         let options = Object.entries(props.options)
 
-        if(props.orderby == 'value') {
+        if (props.orderby == 'value') {
             options = options.sort(([, a], [, b]) => a.localeCompare(b))
         }
 
         return html`
+            ${props.label && html`<${this.Label} ...${props}/>`}
             <select name=${props.name} id=${"input-" + props.name} value=${props.value}
                     onInput=${props.change}
                     class=${props.size == 'lg' ? 'form-control form-control-lg' : 'form-control'} ...${params}>
+                ${props.placeholder && (!props.value || props.value == '') && html`
+                    <option value="" disabled>${props.placeholder}</option>
+                `}
                 ${options.map(([k, v]) => html`
-                    <option value=${k}>${v}</option>
+                    ${props.filterEmpty ? html`
+                        ${k != '' && k != '0' && k != 0 && html`<option value=${k}>${v}</option>`}
+                    ` : html`
+                        <option value=${k}>${v}</option>
+                    `}
                 `)}
             </select>
         `
@@ -75,21 +100,18 @@ export default class Form {
 
     static InputWithLabel = (props, state, context) => {
         return html`
-            <${this.Label} ...${props}/>
             <${this.Input} ...${props}/>
         `
     }
 
     static TextareaWithLabel = (props, state, context) => {
         return html`
-            <${this.Label} ...${props}/>
             <${this.Textarea} ...${props}/>
         `
     }
 
     static SelectWithLabel = (props, state, context) => {
         return html`
-            <${this.Label} ...${props}/>
             <${this.Select} ...${props}/>
         `
     }
