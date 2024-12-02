@@ -22,6 +22,10 @@
     font-variant-ligatures: common-ligatures !important;
 }
 
+.text-justify {
+    text-align: justify;
+}
+
 .align-items-normal {
     align-items: normal !important;
 }
@@ -45,7 +49,7 @@
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-    // Remove focus styles (unneeded border around active element)
+// Remove focus styles (unneeded border around active element)
 :focus-visible {
     outline: 0;
     box-shadow: none;
