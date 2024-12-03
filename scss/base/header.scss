@@ -116,3 +116,54 @@ footer.toolbar {
         text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 }
+
+// Hero section
+// ---------------------------------------------------------------------------
+
+#hero {
+    min-height: 90vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+
+    .display-4, .h2, .h3, .h4 {
+        text-shadow: #333 1px 0 10px;
+    }
+
+    .skin {
+        width: 100%;
+        min-height: 100%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        backdrop-filter: blur(4px);
+    }
+}
+
+#small-hero {
+    min-height: 30vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+// Small hero needs to be bigger on small devices
+@media (max-height: 999px) {
+    #small-hero {
+        min-height: 40vh;
+    }
+}
+@media (max-height: 800px) {
+    #small-hero {
+        min-height: 50vh;
+    }
+}
+@media (max-height: 550px) {
+    #small-hero {
+        min-height: 70vh;
+    }
+}
