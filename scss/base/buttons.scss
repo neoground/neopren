@@ -37,3 +37,8 @@
     line-height: 1.5;
     font-size: 1.25rem;
 }
+
+// Accordion button
+.accordion {
+    --bs-accordion-btn-bg: $m-blue-grey-300;
+}
