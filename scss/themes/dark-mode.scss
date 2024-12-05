@@ -77,6 +77,10 @@
     }
     .list-group {
         --bs-list-group-border-color: #{$body-bg};
+
+        .list-group-item-action {
+            color: $white !important;
+        }
     }
 
     .sidebar .nav-link {
