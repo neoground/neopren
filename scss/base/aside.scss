@@ -153,7 +153,7 @@
     }
 
     .notifications {
-        .material-symbols-outlined {
+        .material-symbols-outlined, .material-symbols-sharp {
             font-size: 1.5rem;
         }
 
@@ -227,6 +227,13 @@
     hr {
         margin: .75rem 0;
     }
+
+    // Active tasks (tasklog)
+    .activity-data {
+        .col-12:not(:last-child) {
+            margin-bottom: .5rem;
+        }
+    }
 }
 
 .logo-icon {
@@ -248,21 +255,8 @@
     }
 }
 
-// Hide sidebar on mobile by default
+// Mobile sidebar as overlay
 @include media-breakpoint-down(lg) {
-    // Invert show / hide
-    .sidebar {
-        // Hide
-        &:not(.hidden) {
-            transform: translate(-$sidebar-width, 0);
-        }
-
-        // Show
-        &.hidden {
-            transform: translate(0, 0);
-        }
-    }
-
     // Sidebar as overlay, so no margin in any case
     .sidebar-is-visible, .sidebar-is-hidden {
         header.toolbar, footer.toolbar {
@@ -274,7 +268,7 @@
         }
     }
 
-    .sidebar-is-hidden {
+    .sidebar-is-visible {
         // Darken background because sidebar is an overlay
         .dark-background {
             opacity: 1;
