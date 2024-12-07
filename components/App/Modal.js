@@ -12,6 +12,8 @@ const html = htm.bind(h);
  * - size: lg|xl|initial (wanted modal size)
  * - title: string|html
  * - id: string (id of modal)
+ * - onClose: optional event handler when close button is pressed (instead of bootstrap's modal hiding)
+ * - hideHeader: optional bool if header should be hidden (title + close button)
  * - children: modal content (will be put inside .modal-content)
  */
 export default class Modal extends Component {
@@ -88,12 +90,16 @@ export default class Modal extends Component {
                             ${props.children}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" onClick=${(e) => {props.oncancel(e, props.id)}}
+                            <button type="button" class="btn btn-secondary" onClick=${(e) => {
+                                props.oncancel(e, props.id)
+                            }}
                                     data-modalid=${props.id}>
-                                <span class="d-flex" innerHTML=${cancel_text} /></button>
-                            <button type="button" class=${"btn text-white btn-" + style} onClick=${(e) => {props.onconfirm(e, props.id)}}
+                                <span class="d-flex" innerHTML=${cancel_text}/></button>
+                            <button type="button" class=${"btn text-white btn-" + style} onClick=${(e) => {
+                                props.onconfirm(e, props.id)
+                            }}
                                     data-modalid=${props.id}>
-                                <span class="d-flex" innerHTML=${confirm_text} /></button>
+                                <span class="d-flex" innerHTML=${confirm_text}/></button>
                         </div>
                     </div>
                 </div>
@@ -108,13 +114,20 @@ export default class Modal extends Component {
         }
 
         return html`
-            <div class="modal fade" tabindex="-1" id=${props.id}>
+            <div class="modal fade" tabindex="-1" id=${props.id} data-bs-backdrop=${props.isstatic ? "static" : "true"}>
                 <div class=${dialog_classes}>
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"><span innerHTML=${props.title}></span></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+                        ${!this.props.hideHeader && html`
+                            <div class="modal-header">
+                                <h5 class="modal-title"><span innerHTML=${props.title}></span></h5>
+                                ${props.onClose ? html`
+                                    <button type="button" class="btn-close" onClick=${props.onClose}
+                                            aria-label="Close"></button>
+                                ` : html`
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                `}
+                            </div>`}
                         ${props.children}
                     </div>
                 </div>
