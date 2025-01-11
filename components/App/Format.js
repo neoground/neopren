@@ -14,6 +14,21 @@ export default class Format {
         return new Intl.NumberFormat('de-DE', {style: 'currency', currency: currency}).format(number)
     }
 
+    static CurrencySymbol = (currencyCode = 'EUR') => {
+        try {
+            // Use Intl.NumberFormat to format a number with the given currency
+            const formatter = new Intl.NumberFormat('en', { style: 'currency', currency: currencyCode })
+
+            // Extract the currency symbol from the formatted string
+            const parts = formatter.formatToParts(1)
+            const symbol = parts.find(part => part.type === 'currency')?.value
+
+            return symbol || null // Return the symbol or null if not found
+        } catch (error) {
+            return null; // Return null for invalid codes
+        }
+    }
+
     static Frequency = freq => {
         // If freq is a number, convert it to a string
         if (typeof freq === 'number') {
