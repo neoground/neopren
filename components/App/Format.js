@@ -452,4 +452,15 @@ export default class Format {
         return `${(bytes / Math.pow(1024, factor)).toFixed(precision)} ${size[factor]}`;
     }
 
+    static Domain = url => {
+        try {
+            // Create a URL object
+            const parsedUrl = new URL(url);
+            // Get the hostname (e.g., www.google.co.uk)
+            return parsedUrl.hostname;
+        } catch (error) {
+            return url; // Return input for invalid URLs
+        }
+    }
+
 }
