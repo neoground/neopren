@@ -36,6 +36,7 @@
     --bs-table-striped-color: #{$body-color} !important;
     --bs-table-active-color: #{$body-color};
     --bs-table-hover-color: #{$body-color};
+    --bs-code-color: #{$m-blue-300};
 
     .card, .modal-content {
         background: $m-blue-grey-700;
