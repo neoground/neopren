@@ -15,6 +15,8 @@ const html = htm.bind(h);
  * - onClose: optional event handler when close button is pressed (instead of bootstrap's modal hiding)
  * - hideHeader: optional bool if header should be hidden (title + close button)
  * - children: modal content (will be put inside .modal-content)
+ * - isstatic: (bool) show static backdrop?
+ * - nobackdrop: (bool) show no backdrop?
  */
 export default class Modal extends Component {
     state = {}
@@ -113,8 +115,21 @@ export default class Modal extends Component {
             dialog_classes += ' modal-' + props.size
         }
 
+        let backdrop = 'true'
+        if (props.isstatic) {
+            backdrop = 'static'
+        }
+        if (props.nobackdrop) {
+            backdrop = 'false'
+        }
+
+        let classes = 'modal fade'
+        if (props.show) {
+            classes += ' show d-block'
+        }
+
         return html`
-            <div class="modal fade" tabindex="-1" id=${props.id} data-bs-backdrop=${props.isstatic ? "static" : "true"}>
+            <div class=${classes} tabindex="-1" id=${props.id} data-bs-backdrop=${backdrop}>
                 <div class=${dialog_classes}>
                     <div class="modal-content">
                         ${!this.props.hideHeader && html`
