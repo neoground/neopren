@@ -23,5 +23,10 @@
     "postcss": "^8.4.39",
     "postcss-cli": "^11.0.0",
     "preact": "^10.22.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
   }
 }
