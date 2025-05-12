@@ -66,30 +66,34 @@ export default class Format {
     }
 
     static Date = (date) => {
-        return this.Day(date).format('DD. MMM YY')
+        return date ? this.Day(date).format('DD. MMM YYYY') : '-'
     }
 
     static DateLong = (date) => {
-        return this.Day(date).format('DD. MMMM YYYY')
+        return date ? this.Day(date).format('DD. MMMM YYYY') : '-'
     }
 
     static DateShort = (date) => {
-        return this.Day(date).format('D. MMM')
+        return date ? this.Day(date).format('D. MMM') : '-'
     }
 
     static Time = (date) => {
-        return this.Day(date).format('HH:mm')
+        return date ? this.Day(date).format('HH:mm') : '-'
     }
 
     static DateTime = (date) => {
-        return this.Day(date).format('DD. MMM YYYY HH:mm')
+        return date ? this.Day(date).format('DD. MMM YYYY HH:mm') : '-'
     }
 
     static DateTimeShort = (date) => {
-        return this.Day(date).format('DD.MM.YY HH:mm')
+        return date ? this.Day(date).format('DD.MM.YY HH:mm') : '-'
     }
 
     static DateDiff = (date) => {
+        if(!date) {
+            return '-'
+        }
+
         if (this.Today().diff(date, 'day') < 366) {
             let months = this.Today().diff(date, 'month')
             let days = this.Today().diff(date.add(months, 'month'), 'day')
@@ -109,6 +113,10 @@ export default class Format {
     }
 
     static DateForHumans = (date, output = 'full') => {
+        if(!date) {
+            return '-'
+        }
+
         // Get date + today but ignore time for comparison
         date = this.Day(date)
             .set('hour', 0)
@@ -222,15 +230,17 @@ export default class Format {
             fontSize = props.fontsize
         }
 
+        let fontVariant = "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24"
+        if(props.fill) {
+            fontVariant = "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24"
+        }
+
         return html`
             <span class="text-center">
                 ${Object.values(stars).map(star => html`
-                    ${star === 'empty' && html`<span class="material-symbols-outlined opacity-25 me-1 d-inline"
-                                                     style=${"font-size: " + fontSize}>star</span>`}
-                    ${star === 'half' && html`<span class="material-symbols-outlined me-1 d-inline"
-                                                    style=${"font-size: " + fontSize}>star_half</span>`}
-                    ${star === 'full' && html`<span class="material-symbols-outlined me-1 d-inline"
-                                                    style=${"font-size: " + fontSize}>star</span>`}
+                    ${star === 'empty' && html`<span class="material-symbols-outlined opacity-25 me-1 d-inline" style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star</span>`}
+                    ${star === 'half' && html`<span class="material-symbols-outlined me-1 d-inline" style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star_half</span>`}
+                    ${star === 'full' && html`<span class="material-symbols-outlined me-1 d-inline" style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star</span>`}
                 `)}
             </span>
         `
@@ -435,7 +445,7 @@ export default class Format {
      */
     static nl2br = (str, replaceMode) => {
         let breakTag = '<br />'
-        let replaceStr = (replaceMode) ? '$1' + breakTag : '$1' + breakTag + '$2'
+        let replaceStr = (replaceMode) ? '$1'+ breakTag : '$1'+ breakTag +'$2'
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, replaceStr)
     }
 
