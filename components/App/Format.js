@@ -152,7 +152,7 @@ export default class Format {
         }
 
         let daydiff = date.diff(now, 'day', true)
-        daydiff = Math.ceil(daydiff)
+        daydiff = Math.round(daydiff)
 
         if (daydiff < 0) {
             isFuture = false
@@ -170,7 +170,7 @@ export default class Format {
             return isFuture ? strings.in + ' ' + daydiff + ' ' + strings.days : strings.ago + ' ' + daydiff + ' ' + strings.days
         }
 
-        let weekdiff = date.diff(now, 'week')
+        let weekdiff = Math.round(daydiff / 7)
         if (weekdiff < 0) {
             weekdiff *= -1
         }
