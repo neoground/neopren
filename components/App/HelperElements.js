@@ -8,10 +8,10 @@ const html = htm.bind(h);
  */
 export default class HelperElements {
     /**
-     * Make links clickable (returns html element)
+     * Make links clickable (returns HTML element)
      *
-     * Set props escape="false" to prevent HTML escaping in string
-     * Set props nl2br="true" to add auto line breaks
+     * Set prop escape="false" to prevent HTML escaping in string
+     * Set prop nl2br="true" to add auto line breaks
      *
      * @param props
      * @returns {*}
@@ -44,13 +44,5 @@ export default class HelperElements {
      */
     static escapeHtml = (unsafe) => {
         return unsafe.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
-    }
-
-    static zipEntry = (props, state, context) => {
-        let el = props.el
-        return html`
-            <strong class="me-2">${el.zip}</strong> ${el.city} <br/>
-            <span class="small text-muted">${el.area} • ${el.state}</span>
-        `
     }
 }
