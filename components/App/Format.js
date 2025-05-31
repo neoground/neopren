@@ -17,7 +17,7 @@ export default class Format {
     static CurrencySymbol = (currencyCode = 'EUR') => {
         try {
             // Use Intl.NumberFormat to format a number with the given currency
-            const formatter = new Intl.NumberFormat('en', { style: 'currency', currency: currencyCode })
+            const formatter = new Intl.NumberFormat('en', {style: 'currency', currency: currencyCode})
 
             // Extract the currency symbol from the formatted string
             const parts = formatter.formatToParts(1)
@@ -90,7 +90,7 @@ export default class Format {
     }
 
     static DateDiff = (date) => {
-        if(!date) {
+        if (!date) {
             return '-'
         }
 
@@ -113,7 +113,7 @@ export default class Format {
     }
 
     static DateForHumans = (date, output = 'full') => {
-        if(!date) {
+        if (!date) {
             return '-'
         }
 
@@ -231,16 +231,19 @@ export default class Format {
         }
 
         let fontVariant = "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24"
-        if(props.fill) {
+        if (props.fill) {
             fontVariant = "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24"
         }
 
         return html`
             <span class="text-center">
                 ${Object.values(stars).map(star => html`
-                    ${star === 'empty' && html`<span class="material-symbols-outlined opacity-25 me-1 d-inline" style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star</span>`}
-                    ${star === 'half' && html`<span class="material-symbols-outlined me-1 d-inline" style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star_half</span>`}
-                    ${star === 'full' && html`<span class="material-symbols-outlined me-1 d-inline" style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star</span>`}
+                    ${star === 'empty' && html`<span class="material-symbols-outlined opacity-25 me-1 d-inline"
+                                                     style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star</span>`}
+                    ${star === 'half' && html`<span class="material-symbols-outlined me-1 d-inline"
+                                                    style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star_half</span>`}
+                    ${star === 'full' && html`<span class="material-symbols-outlined me-1 d-inline"
+                                                    style=${"font-size: " + fontSize + "; font-variation-settings: " + fontVariant}>star</span>`}
                 `)}
             </span>
         `
@@ -436,6 +439,12 @@ export default class Format {
         return durationString
     }
 
+    static MinutesToHoursString(mins) {
+        const hours = Math.floor(mins / 60)
+        const minutes = mins % 60
+        return `${hours > 0 ? `${hours}h ` : ''}${minutes}m`
+    }
+
     /**
      * Replace line breaks with <br />, like PHP's "nl2br" does
      *
@@ -445,7 +454,7 @@ export default class Format {
      */
     static nl2br = (str, replaceMode) => {
         let breakTag = '<br />'
-        let replaceStr = (replaceMode) ? '$1'+ breakTag : '$1'+ breakTag +'$2'
+        let replaceStr = (replaceMode) ? '$1' + breakTag : '$1' + breakTag + '$2'
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, replaceStr)
     }
 
