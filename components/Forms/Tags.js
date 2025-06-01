@@ -1,6 +1,5 @@
 import {Component, h} from '../../node_modules/preact/dist/preact.module.js'
 import htm from '../../node_modules/htm/dist/htm.module.js'
-import Form from "../App/Form.js"
 import Autocomplete from "../App/Autocomplete.js"
 
 const html = htm.bind(h)
@@ -80,26 +79,27 @@ export default class Tags extends Component {
 
     render(props, state, context) {
         return html`
-            <${Form.Label} label=${props.label} name=${this.state.id}/>
-                <${Autocomplete} entries=${props.entries} name=${this.state.id}
-                                 onSelect=${(el) => this.addTag(el)}
-                                 onCustomInput=${(val) => this.setState({custom_value: val})}
-                                 value=${this.state.custom_value}
-                                 renderEntry=${this.autocompleteTag}
-                                 updateInputValue=${(el) => el.value}
-                                 allowCustom=${props.noCustom ? "0" : "1"}
-                />
+            <label for=${"autocomplete-" + this.state.id} class="form-label">${props.label}</label>
+            <${Autocomplete} entries=${props.entries}
+                             name=${this.state.id}
+                             onSelect=${(el) => this.addTag(el)}
+                             onCustomInput=${(val) => this.setState({custom_value: val})}
+                             value=${this.state.custom_value}
+                             renderEntry=${this.autocompleteTag}
+                             updateInputValue=${(el) => el.value}
+                             allowCustom=${props.noCustom ? "0" : "1"}
+            />
 
-                <div class="mt-2">
-                    ${props.tags && Object.entries(props.tags).map(([k, tag]) => html`
-                        <span class="badge bg-primary me-3 mb-2" style="font-weight: normal; font-size: 1rem">${tag}
+            <div class="mt-2">
+                ${props.tags && Object.entries(props.tags).map(([k, tag]) => html`
+                    <span class="badge bg-primary me-3 mb-2" style="font-weight: normal; font-size: 1rem">${tag}
                         <button class="btn btn-sm p-0 d-inline-flex ms-1" data-tag=${tag}
                                 onClick=${(ev) => this.removeTag(ev)}>
                             <span class="material-symbols-outlined" style="font-size: 1rem">close</span>
                         </button>
                     </span>
-                    `)}
-                </div>
+                `)}
+            </div>
         `;
     }
 }
