@@ -17,6 +17,13 @@ const html = htm.bind(h)
  *
  * Comments must be an array of available comments in order. Use Comment::getFor(...) for this.
  * The array might be changed internally on save / delete, everything is reset if comments prop changes.
+ *
+ * Props:
+ *
+ * - class (the class name of the object that's commented)
+ * - entity (the element id that's commented)
+ * - comments (the comments object)
+ * - notitle (optional, set this to hide the title with comment count)
  */
 export default class Comments extends Component {
     state = {
@@ -133,13 +140,15 @@ export default class Comments extends Component {
     render(props, state, context) {
         return html`
             <div class="row text-start">
-                <div class="col-12 mb-2">
-                    <h3 class="h3">
-                        ${this.state.comments.length < 1 && html`No Comments`}
-                        ${this.state.comments.length == 1 && html`1 Comment`}
-                        ${this.state.comments.length > 1 && html`${this.state.comments.length} Comments`}
-                    </h3>
-                </div>
+                ${!Boolean(props.notitle) && html`
+                    <div class="col-12 mb-2">
+                        <h3 class="h3">
+                            ${this.state.comments.length < 1 && html`No Comments`}
+                            ${this.state.comments.length == 1 && html`1 Comment`}
+                            ${this.state.comments.length > 1 && html`${this.state.comments.length} Comments`}
+                        </h3>
+                    </div>
+                `}
                 <div class="col-12 mb-3">
                     <div>
                         <${Form.Textarea} name="comment" value=${this.state.comment} change=${this.onInput}/>
