@@ -68,11 +68,11 @@ For comprehensive guides, component details, and API references, please visit
 our [documentation](https://neoground.com/docs/neopren/index). Here, you will find all the resources needed to utilize
 Neopren to its fullest potential.
 
-## Currently in Alpha
+## Still in Alpha
 
-Please note that we're currently actively developing neopren. We already use it in our own apps but it's still far from
-being a stable design system. Over the course of this year we'll add all needed modules so you can use it for your own
-apps as well.
+Please note that we're currently actively developing neopren. We already use it in our own apps, but it's still far from
+being a stable design system. Over the course of this year we'll add all necessary modules,
+so you can use it in your own apps as well.
 
 ## Contribute
 
@@ -81,9 +81,9 @@ features, your input is highly valued.
 
 ## License
 
-This project is licensed under the Mozilla Public License 2.0 (MPL 2.0) -
-see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the Mozilla Public License 2.0 (MPL 2.0) - see 
+the [LICENSE.md](LICENSE.md) file for details.
 If a copy of the MPL was not distributed with this file, You can obtain one at
 [https://mozilla.org/MPL/2.0](https://mozilla.org/MPL/2.0).
 
-Copyright (c) 2024 Neoground GmbH
+Copyright (c) 2024–2025 Neoground GmbH
